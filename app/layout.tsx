@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "RallyUp — Find your match",
-  description: "Find tennis players, schedule matches, score live, and track your game.",
+  title: "RallyUp — More tennis. Better days.",
+  description: "Find tennis players, set up a match, find a court, and keep track of your game with RallyUp.",
   other: {
     "codex-preview": "development",
   },

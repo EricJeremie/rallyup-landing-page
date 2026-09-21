@@ -1,4 +1,3 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <circle cx="32" cy="32" r="30" fill="#B9ED00"/>
-  <path d="M6 18c15 3 22 13 23 28M58 18c-15 3-22 13-23 28" fill="none" stroke="#11140F" stroke-width="5" stroke-linecap="round"/>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" role="img" aria-labelledby="title desc">
+    <title id="title">RallyUp favicon</title><desc id="desc">Simplified RallyUp tennis ball on a deep-green tile for small browser and shortcut icons.</desc><rect width="64" height="64" rx="15" fill="#0F2B1F"/><circle cx="32" cy="32" r="23" fill="#A7E632"/><path d="M 11.760000000000002 36.14 C 23.259999999999998 44.88, 30.85 37.519999999999996, 36.14 25.56 C 41.2 15.440000000000001, 46.95 17.740000000000002, 52.7 20.96" fill="none" stroke="#0F2B1F" stroke-width="6.5" stroke-linecap="round"/>
+  </svg>
