@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Link from "next/link";
 import {
   ArrowDownRight,
   ArrowRight,
@@ -59,7 +58,7 @@ export default function LandingPage() {
   return (
     <main className="landing-page" id="top">
       <header className="marketing-header">
-        <Link className="marketing-logo" href="/" aria-label="RallyUp home">
+        <a className="marketing-logo" href="/" aria-label="RallyUp home">
           <Image
             src="/assets/branding/rallyup-logo-horizontal.svg"
             alt="RallyUp — Play, People, Progress"
@@ -67,13 +66,13 @@ export default function LandingPage() {
             height={53}
             priority
           />
-        </Link>
+        </a>
         <nav className="marketing-nav" aria-label="Main navigation">
           <a href="#features">Features</a>
           <a href="#screens">The app</a>
-          <Link className="nav-cta" href="/app">
+          <a className="nav-cta" href="/app">
             Explore RallyUp <ArrowRight aria-hidden="true" />
-          </Link>
+          </a>
         </nav>
       </header>
 
@@ -204,9 +203,9 @@ export default function LandingPage() {
           <p className="eyebrow">Play · People · Progress</p>
           <h2 id="closing-title">Ready when<br />you are.</h2>
         </div>
-        <Link className="button-dark" href="/app">
+        <a className="button-dark" href="/app">
           Explore RallyUp <ArrowRight aria-hidden="true" />
-        </Link>
+        </a>
         <span className="closing-mark" aria-hidden="true">R</span>
       </section>
 
