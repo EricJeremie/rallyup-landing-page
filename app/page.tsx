@@ -7,6 +7,7 @@ import {
   Search,
   Swords,
 } from "lucide-react";
+import { ComingSoonButton } from "@/components/coming-soon-button";
 
 type PhoneProps = {
   src: string;
@@ -70,9 +71,7 @@ export default function LandingPage() {
         <nav className="marketing-nav" aria-label="Main navigation">
           <a href="#features">Features</a>
           <a href="#screens">The app</a>
-          <a className="nav-cta" href="/app">
-            Explore RallyUp <ArrowRight aria-hidden="true" />
-          </a>
+          <ComingSoonButton className="nav-cta" />
         </nav>
       </header>
 
@@ -203,9 +202,7 @@ export default function LandingPage() {
           <p className="eyebrow">Play · People · Progress</p>
           <h2 id="closing-title">Ready when<br />you are.</h2>
         </div>
-        <a className="button-dark" href="/app">
-          Explore RallyUp <ArrowRight aria-hidden="true" />
-        </a>
+        <ComingSoonButton className="button-dark" />
         <span className="closing-mark" aria-hidden="true">R</span>
       </section>
 

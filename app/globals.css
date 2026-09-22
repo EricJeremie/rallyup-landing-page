@@ -555,6 +555,7 @@ h2 { margin: 0; font-size: 1.05rem; letter-spacing: -.025em; }
   font-family: var(--font-sans);
 }
 .landing-page a { color: inherit; text-decoration: none; }
+.coming-soon-button { border: 0; cursor: pointer; font: inherit; }
 .marketing-header { display: flex; width: min(100% - 64px, 1280px); min-height: 88px; align-items: center; justify-content: space-between; gap: 28px; margin: 0 auto; }
 .marketing-logo { display: flex; width: 250px; flex: 0 0 auto; align-items: center; }
 .marketing-logo img { display: block; width: 100%; height: auto; }
