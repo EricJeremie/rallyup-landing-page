@@ -586,7 +586,7 @@ h2 { margin: 0; font-size: 1.05rem; letter-spacing: -.025em; }
 .iphone-mockup { position: relative; flex: 0 0 auto; overflow: hidden; padding: 8px; border: 1px solid rgb(255 255 255 / 34%); border-radius: 44px; background: linear-gradient(145deg, #454a43, #0c110e 23%, #151a16 74%, #484d47); box-shadow: 0 28px 62px rgb(0 0 0 / 28%), inset 0 1px 1px rgb(255 255 255 / 42%); aspect-ratio: .461;
 }
 .iphone-screen { position: relative; width: 100%; height: 100%; overflow: hidden; border-radius: 36px; background: #f7f8f7; }
-.iphone-screen-image { display: block; object-fit: cover; object-position: center; }
+.iphone-screen-image { display: block; object-fit: contain; object-position: center top; background: #f7f8f7; }
 .iphone-island { position: absolute; z-index: 2; top: 2.05%; left: 50%; width: 29%; height: 1.55%; transform: translateX(-50%); border-radius: 99px; background: #111511; box-shadow: 0 1px 2px rgb(0 0 0 / 38%); }
 .hero-phone { position: absolute; top: 50%; width: clamp(210px, 23vw, 292px); }
 .hero-phone-back { z-index: 1; right: 3%; transform: translateY(-48%) rotate(8deg); }
