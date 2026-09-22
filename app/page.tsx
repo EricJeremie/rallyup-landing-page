@@ -217,7 +217,11 @@ export default function LandingPage() {
           height={63}
         />
         <p>Find your people. Play more tennis.</p>
-        <a href="#top">Back to top <ArrowRight aria-hidden="true" /></a>
+        <div className="footer-links">
+          <a href="/privacy">Privacy</a>
+          <a href="/terms">Terms</a>
+          <a href="#top">Back to top <ArrowRight aria-hidden="true" /></a>
+        </div>
       </footer>
     </main>
   );
