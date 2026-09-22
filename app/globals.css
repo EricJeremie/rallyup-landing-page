@@ -556,7 +556,14 @@ h2 { margin: 0; font-size: 1.05rem; letter-spacing: -.025em; }
 }
 .landing-page a { color: inherit; text-decoration: none; }
 .coming-soon-button { border: 0; cursor: pointer; font: inherit; }
-.marketing-header { display: flex; width: min(100% - 64px, 1280px); min-height: 88px; align-items: center; justify-content: space-between; gap: 28px; margin: 0 auto; }
+.scroll-progress { position: fixed; z-index: 50; top: 0; left: 0; width: 100%; height: 3px; pointer-events: none; }
+.scroll-progress span { display: block; width: 100%; height: 100%; transform: scaleX(var(--scroll-progress, 0)); transform-origin: left center; background: var(--landing-lime); box-shadow: 0 0 12px rgb(167 230 50 / 58%); }
+[data-reveal] { opacity: 0; transform: translate3d(0, 24px, 0); transition: opacity 700ms cubic-bezier(.22, 1, .36, 1), transform 700ms cubic-bezier(.22, 1, .36, 1); transition-delay: var(--reveal-delay, 0ms); }
+[data-reveal="fade-down"] { transform: translate3d(0, -18px, 0); }
+[data-reveal].is-visible { opacity: 1; transform: translate3d(0, 0, 0); }
+.parallax-layer { --parallax-y: 0px; transform: translate3d(0, var(--parallax-y), 0); will-change: transform; }
+.iphone-mockup[data-tilt] > .iphone-screen { transform: perspective(900px) rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg)); transition: transform 220ms cubic-bezier(.22, 1, .36, 1); will-change: transform; }
+.marketing-header { position: sticky; top: 0; z-index: 30; display: flex; width: min(100% - 64px, 1280px); min-height: 88px; align-items: center; justify-content: space-between; gap: 28px; margin: 0 auto; background: color-mix(in srgb, var(--landing-paper) 76%, transparent); border-bottom: 1px solid rgb(220 226 220 / 72%); backdrop-filter: blur(22px) saturate(140%); -webkit-backdrop-filter: blur(22px) saturate(140%); }
 .marketing-logo { display: flex; width: 250px; flex: 0 0 auto; align-items: center; }
 .marketing-logo img { display: block; width: 100%; height: auto; }
 .marketing-nav { display: flex; align-items: center; gap: clamp(20px, 3vw, 44px); color: #435248; font-size: .9rem; font-weight: 600; }
@@ -567,6 +574,7 @@ h2 { margin: 0; font-size: 1.05rem; letter-spacing: -.025em; }
 .marketing-nav .nav-cta svg, .button-lime svg, .button-dark svg { width: 17px; height: 17px; }
 .hero-panel { position: relative; display: grid; width: min(100% - 48px, 1376px); min-height: min(700px, calc(100svh - 108px)); grid-template-columns: minmax(0, .92fr) minmax(0, 1.08fr); align-items: center; overflow: hidden; margin: 10px auto 0; padding: clamp(54px, 7vw, 100px) clamp(36px, 7.2vw, 106px); border-radius: 34px; background: var(--landing-green); color: #fff; }
 .hero-panel::before { position: absolute; top: -35%; right: -13%; width: min(70vw, 920px); aspect-ratio: 1; border: 1px solid rgb(255 255 255 / 9%); border-radius: 50%; box-shadow: 0 0 0 64px rgb(255 255 255 / 2.5%), 0 0 0 132px rgb(255 255 255 / 2%); content: ""; pointer-events: none; }
+.hero-rings { position: absolute; z-index: 0; right: 18%; bottom: -8%; width: 180px; aspect-ratio: 1; border: 1px solid rgb(167 230 50 / 28%); border-radius: 50%; box-shadow: 0 0 0 30px rgb(167 230 50 / 7%), 0 0 0 62px rgb(167 230 50 / 4%); }
 .hero-copy { position: relative; z-index: 2; max-width: 570px; padding: 12px 0 24px; }
 .hero-kicker, .eyebrow { display: flex; align-items: center; gap: 9px; margin: 0 0 22px; color: #607165; font-size: .76rem; font-weight: 800; letter-spacing: .13em; line-height: 1.35; text-transform: uppercase; }
 .hero-kicker { color: #c3d3c8; }
@@ -590,13 +598,16 @@ h2 { margin: 0; font-size: 1.05rem; letter-spacing: -.025em; }
 .iphone-screen-image { display: block; object-fit: contain; object-position: center top; background: #f7f8f7; }
 .iphone-island { position: absolute; z-index: 2; top: 2.05%; left: 50%; width: 29%; height: 1.55%; transform: translateX(-50%); border-radius: 99px; background: #111511; box-shadow: 0 1px 2px rgb(0 0 0 / 38%); }
 .hero-phone { position: absolute; top: 50%; width: clamp(210px, 23vw, 292px); }
+.hero-phone { animation: phone-drift 8s ease-in-out infinite; }
 .hero-phone-back { z-index: 1; right: 3%; transform: translateY(-48%) rotate(8deg); }
+.hero-phone-back { animation-delay: -2.4s; }
 .hero-phone-front { z-index: 2; top: 55%; left: 8%; transform: translateY(-50%) rotate(-7deg); }
 .hero-orbit { position: absolute; z-index: 0; display: block; border: 1px solid rgb(255 255 255 / 11%); border-radius: 50%; }
 .hero-orbit-one { top: 14%; right: -1%; width: 52px; height: 52px; }
 .hero-orbit-two { right: 11%; bottom: 4%; width: 17px; height: 17px; background: var(--landing-lime); }
 .hero-scroll-cue { position: absolute; right: 34px; bottom: 29px; display: grid; width: 42px; height: 42px; place-items: center; border: 1px solid rgb(255 255 255 / 23%); border-radius: 50%; color: #fff !important; }
 .hero-scroll-cue svg { width: 17px; }
+@keyframes phone-drift { 0%, 100% { translate: 0 0; } 50% { translate: 0 -8px; } }
 .section-wrap { width: min(100% - 64px, 1180px); margin-right: auto; margin-left: auto; }
 .feature-section { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: clamp(48px, 6vw, 88px); padding-top: clamp(100px, 14vw, 176px); padding-bottom: clamp(100px, 13vw, 160px); }
 .section-intro { position: sticky; top: 48px; align-self: start; }
@@ -753,5 +764,7 @@ h2 { margin: 0; font-size: 1.05rem; letter-spacing: -.025em; }
   .screen-feature { grid-template-columns: minmax(125px, .8fr) minmax(0, 1fr); gap: 16px; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .marketing-nav > a, .button-lime, .button-dark { transition: none; }
+  .marketing-nav > a, .button-lime, .button-dark, [data-reveal], .iphone-screen { transition: none !important; }
+  [data-reveal], .parallax-layer, .hero-phone { opacity: 1 !important; transform: none !important; translate: none !important; animation: none !important; }
+  .scroll-progress span { transform: scaleX(0) !important; }
 }

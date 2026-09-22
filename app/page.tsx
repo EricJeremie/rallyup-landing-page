@@ -1,4 +1,5 @@
 import Image from "next/image";
+import type { CSSProperties } from "react";
 import {
   ArrowDownRight,
   ArrowRight,
@@ -8,6 +9,7 @@ import {
   Swords,
 } from "lucide-react";
 import { ComingSoonButton } from "@/components/coming-soon-button";
+import { MotionLayer } from "@/components/motion-layer";
 
 type PhoneProps = {
   src: string;
@@ -58,6 +60,8 @@ const features = [
 export default function LandingPage() {
   return (
     <main className="landing-page" id="top">
+      <MotionLayer />
+      <div className="scroll-progress" aria-hidden="true"><span /></div>
       <header className="marketing-header">
         <a className="marketing-logo" href="/" aria-label="RallyUp home">
           <Image
@@ -76,7 +80,8 @@ export default function LandingPage() {
       </header>
 
       <section className="hero-panel" aria-labelledby="hero-title">
-        <div className="hero-copy">
+        <span className="hero-rings parallax-layer" data-parallax="0.16" aria-hidden="true" />
+        <div className="hero-copy" data-reveal="fade-up">
           <p className="hero-kicker"><Image src="/assets/branding/rallyup-ball.svg" alt="" width={18} height={18} /> Tennis is better together</p>
           <h1 id="hero-title">More tennis.<br /><em>Better days.</em></h1>
           <p className="hero-description">
@@ -93,7 +98,7 @@ export default function LandingPage() {
           <div className="hero-brand-line"><span>PLAY</span><i /><span>PEOPLE</span><i /><span>PROGRESS</span></div>
         </div>
 
-        <div className="hero-phones" aria-label="RallyUp app screen previews">
+        <div className="hero-phones parallax-layer" data-parallax="0.08" aria-label="RallyUp app screen previews">
           <IPhone
             src="/images/screens/find-players.png"
             alt="RallyUp Find Players screen with nearby tennis players and match filters"
@@ -106,8 +111,8 @@ export default function LandingPage() {
             className="hero-phone hero-phone-front"
             priority
           />
-          <span className="hero-orbit hero-orbit-one" aria-hidden="true" />
-          <span className="hero-orbit hero-orbit-two" aria-hidden="true" />
+          <span className="hero-orbit hero-orbit-one parallax-layer" data-parallax="0.2" aria-hidden="true" />
+          <span className="hero-orbit hero-orbit-two parallax-layer" data-parallax="0.28" aria-hidden="true" />
         </div>
         <a className="hero-scroll-cue" href="#features" aria-label="Scroll to RallyUp features">
           <ArrowDownRight aria-hidden="true" />
@@ -115,14 +120,14 @@ export default function LandingPage() {
       </section>
 
       <section className="feature-section section-wrap" id="features" aria-labelledby="features-title">
-        <div className="section-intro">
+        <div className="section-intro" data-reveal="fade-up">
           <p className="eyebrow">The game, brought closer</p>
           <h2 id="features-title">Good games start with good people.</h2>
           <p>From the first invite to the final point, RallyUp helps you spend less time coordinating and more time on court.</p>
         </div>
         <div className="feature-list">
           {features.map(({ number, icon: Icon, title, text }) => (
-            <article className="feature-row" key={number}>
+            <article className="feature-row" key={number} data-reveal="fade-up" style={{ "--reveal-delay": `${Number(number) * 70}ms` } as CSSProperties}>
               <span className="feature-number">{number}</span>
               <span className="feature-icon"><Icon aria-hidden="true" /></span>
               <div>
@@ -132,7 +137,7 @@ export default function LandingPage() {
               <ArrowRight className="feature-arrow" aria-hidden="true" />
             </article>
           ))}
-          <div className="courts-note">
+          <div className="courts-note" data-reveal="fade-up" style={{ "--reveal-delay": "260ms" } as CSSProperties}>
             <span className="courts-note-icon"><MapPin aria-hidden="true" /></span>
             <p><strong>Need a place to play?</strong><br />Find nearby courts and save your favorite spots.</p>
             <a href="#screens" aria-label="See RallyUp court finder screen"><ArrowRight aria-hidden="true" /></a>
@@ -141,7 +146,7 @@ export default function LandingPage() {
       </section>
 
       <section className="screens-section" id="screens" aria-labelledby="screens-title">
-        <div className="screens-heading section-wrap">
+        <div className="screens-heading section-wrap" data-reveal="fade-up">
           <div>
             <p className="eyebrow eyebrow-light">A closer look</p>
             <h2 id="screens-title">Made for the moments<br />that make the match.</h2>
@@ -150,7 +155,7 @@ export default function LandingPage() {
         </div>
 
         <div className="screen-showcase section-wrap">
-          <article className="screen-feature screen-feature-score">
+          <article className="screen-feature screen-feature-score" data-reveal="fade-up">
             <div className="showcase-phone-wrap">
               <IPhone
                 src="/images/screens/live-scoring.png"
@@ -165,7 +170,7 @@ export default function LandingPage() {
             </div>
           </article>
 
-          <article className="screen-feature screen-feature-courts">
+          <article className="screen-feature screen-feature-courts" data-reveal="fade-up" style={{ "--reveal-delay": "100ms" } as CSSProperties}>
             <div className="showcase-phone-wrap">
               <IPhone
                 src="/images/screens/court-locator.png"
@@ -180,7 +185,7 @@ export default function LandingPage() {
             </div>
           </article>
 
-          <article className="screen-feature screen-feature-progress">
+          <article className="screen-feature screen-feature-progress" data-reveal="fade-up" style={{ "--reveal-delay": "180ms" } as CSSProperties}>
             <div className="showcase-phone-wrap">
               <IPhone
                 src="/images/screens/performance.png"
@@ -197,13 +202,13 @@ export default function LandingPage() {
         </div>
       </section>
 
-      <section className="closing-section section-wrap" aria-labelledby="closing-title">
+      <section className="closing-section section-wrap" data-reveal="fade-up" aria-labelledby="closing-title">
         <div>
           <p className="eyebrow">Play · People · Progress</p>
           <h2 id="closing-title">Ready when<br />you are.</h2>
         </div>
         <ComingSoonButton className="button-dark" />
-        <span className="closing-mark" aria-hidden="true">R</span>
+        <span className="closing-mark parallax-layer" data-parallax="0.08" aria-hidden="true">R</span>
       </section>
 
       <footer className="marketing-footer section-wrap">
