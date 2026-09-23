@@ -57,19 +57,34 @@ struct RallyRootView: View {
             }
         }
         .tint(RallyTheme.darkGreen)
-        .onAppear { store.activate(account: accountSession.currentAccount, cloudBacked: accountSession.isCloudBacked) }
+        .onAppear {
+            store.activate(account: accountSession.currentAccount, cloudBacked: accountSession.isCloudBacked)
+            preparePushNotifications()
+        }
         .onChange(of: accountSession.currentAccount?.id) { _, _ in
             store.activate(account: accountSession.currentAccount, cloudBacked: accountSession.isCloudBacked)
+            preparePushNotifications()
         }
         .onChange(of: accountSession.isSignedIn) { _, _ in
             store.activate(account: accountSession.currentAccount, cloudBacked: accountSession.isCloudBacked)
+            preparePushNotifications()
         }
         .onChange(of: accountSession.isCloudBacked) { _, _ in
             store.activate(account: accountSession.currentAccount, cloudBacked: accountSession.isCloudBacked)
+            preparePushNotifications()
+        }
+        .onReceive(NotificationCenter.default.publisher(for: .rallyUpAPNsToken)) { notification in
+            guard let token = notification.object as? String else { return }
+            accountSession.registerPushToken(token)
         }
         .onOpenURL { url in
             accountSession.handleAuthURL(url)
         }
+    }
+
+    private func preparePushNotifications() {
+        guard accountSession.isCloudBacked else { return }
+        Task { await RallyUpPushNotifications.requestPermissionAndRegister() }
     }
 }
 

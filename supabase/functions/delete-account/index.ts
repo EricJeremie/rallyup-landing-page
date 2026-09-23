@@ -29,6 +29,26 @@ Deno.serve(async (request) => {
   const adminClient = createClient(supabaseUrl, serviceRoleKey, {
     auth: { autoRefreshToken: false, persistSession: false },
   });
+
+  // Auth deletion rejects users who still own Storage objects. Remove the
+  // account-scoped photo objects first; the database rows then cascade away.
+  for (const bucket of ["profile-photos", "racket-photos"]) {
+    const { data: objects, error: listError } = await adminClient.storage
+      .from(bucket)
+      .list(user.id, { limit: 1000, offset: 0 });
+    if (listError) {
+      return Response.json({ error: "Account deletion failed" }, { status: 500 });
+    }
+
+    const paths = (objects ?? []).map((object) => `${user.id}/${object.name}`);
+    if (paths.length > 0) {
+      const { error: removeError } = await adminClient.storage.from(bucket).remove(paths);
+      if (removeError) {
+        return Response.json({ error: "Account deletion failed" }, { status: 500 });
+      }
+    }
+  }
+
   const { error } = await adminClient.auth.admin.deleteUser(user.id);
   if (error) {
     return Response.json({ error: "Account deletion failed" }, { status: 500 });

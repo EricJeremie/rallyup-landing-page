@@ -73,9 +73,15 @@ struct PlayerDiscoveryView: View {
         .sheet(item: $selectedPlayer) { player in
             PlayerProfileSheet(player: player)
                 .environmentObject(store)
+                .environmentObject(accountSession)
         }
-        .task(id: accountSession.currentAccount?.id) {
-            let remotePlayers = await accountSession.refreshDiscoverablePlayers()
+        .task(id: "\(accountSession.currentAccount?.id.uuidString ?? "none")-\(searchText)-\(selectedLevel?.rawValue ?? "all")") {
+            guard accountSession.isCloudBacked else { return }
+            try? await Task.sleep(for: .milliseconds(250))
+            let remotePlayers = await accountSession.refreshDiscoverablePlayers(
+                searchQuery: searchText,
+                skillLevel: selectedLevel
+            )
             store.setDiscoverablePlayers(remotePlayers)
         }
     }
@@ -169,8 +175,13 @@ private struct PlayerDiscoveryCard: View {
 
 private struct PlayerProfileSheet: View {
     @EnvironmentObject private var store: RallyStore
+    @EnvironmentObject private var accountSession: AccountSessionStore
     @Environment(\.dismiss) private var dismiss
     @State private var showingInvite = false
+    @State private var showingBlockConfirmation = false
+    @State private var showingReportReasons = false
+    @State private var moderationError: String?
+    @State private var isModerating = false
 
     let player: PlayerProfile
 
@@ -222,6 +233,19 @@ private struct PlayerProfileSheet: View {
                 ToolbarItem(placement: .topBarLeading) {
                     Button("Close") { dismiss() }
                 }
+                ToolbarItem(placement: .topBarTrailing) {
+                    Menu {
+                        Button("Block player", role: .destructive) {
+                            showingBlockConfirmation = true
+                        }
+                        Button("Report player") {
+                            showingReportReasons = true
+                        }
+                    } label: {
+                        Image(systemName: "ellipsis.circle")
+                    }
+                    .accessibilityLabel("Player safety options")
+                }
             }
             .safeAreaInset(edge: .bottom) {
                 Button {
@@ -246,6 +270,66 @@ private struct PlayerProfileSheet: View {
         }
         .presentationDetents([.medium, .large])
         .presentationDragIndicator(.visible)
+        .confirmationDialog(
+            "Block \(player.displayName)?",
+            isPresented: $showingBlockConfirmation,
+            titleVisibility: .visible
+        ) {
+            Button("Block player", role: .destructive) { blockPlayer() }
+            Button("Cancel", role: .cancel) { }
+        } message: {
+            Text("They will no longer appear in player discovery or be able to invite you.")
+        }
+        .confirmationDialog(
+            "Why are you reporting this player?",
+            isPresented: $showingReportReasons,
+            titleVisibility: .visible
+        ) {
+            ForEach(PlayerReportReason.allCases) { reason in
+                Button(reason.title) { reportPlayer(reason) }
+            }
+            Button("Cancel", role: .cancel) { }
+        }
+        .alert(
+            "Couldn’t update player safety settings",
+            isPresented: Binding(
+                get: { moderationError != nil },
+                set: { if !$0 { moderationError = nil } }
+            )
+        ) {
+            Button("OK", role: .cancel) { moderationError = nil }
+        } message: {
+            Text(moderationError ?? "Try again in a moment.")
+        }
+    }
+
+    private func blockPlayer() {
+        guard !isModerating else { return }
+        isModerating = true
+        Task {
+            defer { isModerating = false }
+            do {
+                try await accountSession.blockPlayer(player.id)
+                store.removePlayer(player.id)
+                dismiss()
+            } catch {
+                moderationError = error.localizedDescription
+            }
+        }
+    }
+
+    private func reportPlayer(_ reason: PlayerReportReason) {
+        guard !isModerating else { return }
+        isModerating = true
+        Task {
+            defer { isModerating = false }
+            do {
+                try await accountSession.reportPlayer(player.id, reason: reason)
+                dismiss()
+            } catch {
+                moderationError = error.localizedDescription
+            }
+        }
     }
 
     private var distance: String {
@@ -362,7 +446,12 @@ private struct InviteComposerSheet: View {
             }
         }
         .presentationDetents([.medium, .large])
-        .onAppear { ensureDoublesLineup() }
+        .onAppear {
+            if let firstCourtID = store.courts.first?.id {
+                selectedCourtID = firstCourtID
+            }
+            ensureDoublesLineup()
+        }
         .onChange(of: matchType) { _, _ in ensureDoublesLineup() }
         .onChange(of: teammateID) { _, _ in ensureDoublesLineup() }
         .onChange(of: opponentPartnerID) { _, _ in ensureDoublesLineup() }

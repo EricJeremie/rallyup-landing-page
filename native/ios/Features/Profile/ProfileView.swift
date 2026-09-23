@@ -50,6 +50,7 @@ struct ProfileView: View {
         .sheet(isPresented: $showingEditProfile) {
             EditProfileSheet()
                 .environmentObject(store)
+                .environmentObject(accountSession)
         }
         .alert("Couldn’t delete account", isPresented: Binding(
             get: { deleteError != nil },
@@ -198,11 +199,14 @@ struct ProfileView: View {
 
 private struct EditProfileSheet: View {
     @EnvironmentObject private var store: RallyStore
+    @EnvironmentObject private var accountSession: AccountSessionStore
     @Environment(\.dismiss) private var dismiss
     @State private var displayName: String
     @State private var skillLevel: SkillLevel
     @State private var availability: String
     @State private var homeArea: String
+    @State private var isSaving = false
+    @State private var saveError: String?
 
     init() {
         _displayName = State(initialValue: DemoData.currentUser.displayName)
@@ -228,7 +232,9 @@ private struct EditProfileSheet: View {
                         .textInputAutocapitalization(.sentences)
                 }
                 Section {
-                    Text("This local profile is saved on this device. Account sync will be connected in a later milestone.")
+                    Text(accountSession.isCloudBacked
+                        ? "Your profile is synced to RallyUp and shown according to your discoverability settings."
+                        : "This local profile is saved on this device while you are in demo mode.")
                         .font(.footnote)
                         .foregroundStyle(.secondary)
                 }
@@ -245,19 +251,62 @@ private struct EditProfileSheet: View {
                 ToolbarItem(placement: .cancellationAction) { Button("Cancel") { dismiss() } }
                 ToolbarItem(placement: .confirmationAction) {
                     Button("Save") {
-                        store.updateProfile(
-                            displayName: displayName,
-                            skillLevel: skillLevel,
-                            availabilitySummary: availability,
-                            homeArea: homeArea.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? nil : homeArea
-                        )
-                        dismiss()
+                        saveProfile()
                     }
-                    .disabled(displayName.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
+                    .disabled(isSaving || displayName.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
                 }
             }
         }
         .presentationDetents([.medium, .large])
+        .alert(
+            "Couldn’t save profile",
+            isPresented: Binding(
+                get: { saveError != nil },
+                set: { if !$0 { saveError = nil } }
+            )
+        ) {
+            Button("OK", role: .cancel) { saveError = nil }
+        } message: {
+            Text(saveError ?? "Try again in a moment.")
+        }
+    }
+
+    private func saveProfile() {
+        let cleanHomeArea = homeArea.trimmingCharacters(in: .whitespacesAndNewlines)
+        let cleanAvailability = availability.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !displayName.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else { return }
+
+        if accountSession.isCloudBacked {
+            isSaving = true
+            Task {
+                defer { isSaving = false }
+                do {
+                    try await accountSession.updateProfile(
+                        displayName: displayName,
+                        skillLevel: skillLevel,
+                        availabilitySummary: cleanAvailability,
+                        homeArea: cleanHomeArea.isEmpty ? nil : cleanHomeArea
+                    )
+                    store.updateProfile(
+                        displayName: displayName,
+                        skillLevel: skillLevel,
+                        availabilitySummary: cleanAvailability,
+                        homeArea: cleanHomeArea.isEmpty ? nil : cleanHomeArea
+                    )
+                    dismiss()
+                } catch {
+                    saveError = error.localizedDescription
+                }
+            }
+        } else {
+            store.updateProfile(
+                displayName: displayName,
+                skillLevel: skillLevel,
+                availabilitySummary: cleanAvailability,
+                homeArea: cleanHomeArea.isEmpty ? nil : cleanHomeArea
+            )
+            dismiss()
+        }
     }
 }
 

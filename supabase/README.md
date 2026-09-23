@@ -17,7 +17,9 @@ RLS is enabled on every public table. `profiles` only exposes rows marked discov
 
 `match_live_scores` is added to the `supabase_realtime` publication so authorized match participants can receive live score changes.
 
-New iOS accounts use Supabase Auth. Email confirmation, password reset, recovery deep links, and account deletion are supported. If email verification is required, the device keeps a local onboarding draft (including profile photo, selected strengths, racket names, and racket photos) until the user verifies and signs in; profile data and photos are then uploaded. APNs push delivery is still a separate release task. Availability-based player search and moderation actions that affect other users should be implemented server-side before launch.
+New iOS accounts use Supabase Auth. Email confirmation, password reset, recovery deep links, and account deletion are supported. If email verification is required, the device keeps a local onboarding draft (including profile photo, selected strengths, racket names, and racket photos) until the user verifies and signs in; profile data and photos are then uploaded. Player discovery, block/report actions, and availability filters are server-side in the launch-readiness migration. The iOS client registers APNs device tokens, and the `send-match-push` Edge Function sends invite/response pushes once the APNs secrets below are configured.
+
+Configure these Supabase Function secrets before enabling production push delivery: `APNS_KEY_P8`, `APNS_KEY_ID`, `APNS_TEAM_ID`, `APNS_BUNDLE_ID`, and `APNS_ENVIRONMENT` (`sandbox` or `production`).
 
 ## Local workflow and verification
 

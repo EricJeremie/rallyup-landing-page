@@ -350,6 +350,33 @@ private struct SupabaseProfileUpdate: Encodable {
     let player_strengths: [String]
 }
 
+private struct SupabaseProfileBasicsUpdate: Encodable {
+    let display_name: String
+    let skill_level: String
+    let home_area: String?
+    let availability_summary: String
+}
+
+private struct SupabasePushTokenRecord: Encodable {
+    let user_id: UUID
+    let device_token: String
+    let platform: String
+    let last_seen_at: String
+}
+
+private struct SupabasePushTokenOwner: Decodable {
+    let user_id: UUID
+}
+
+private struct SupabasePushTokenRefresh: Encodable {
+    let last_seen_at: String
+}
+
+private struct MatchPushRequest: Encodable {
+    let match_id: UUID
+    let event: String
+}
+
 private struct SupabaseCourtRecord: Codable {
     let id: UUID
     let name: String
@@ -400,6 +427,26 @@ enum MatchSyncError: LocalizedError {
         switch self {
         case .playerNotFound(let name): "Couldn’t find \(name) as a RallyUp player. Choose a registered player for cloud matches."
         case .courtNotFound(let name): "Couldn’t find \(name) in the RallyUp court catalog."
+        }
+    }
+}
+
+enum PlayerReportReason: String, CaseIterable, Identifiable {
+    case harassment
+    case unsafeBehavior = "unsafe_behavior"
+    case spam
+    case fakeProfile = "fake_profile"
+    case other
+
+    var id: String { rawValue }
+
+    var title: String {
+        switch self {
+        case .harassment: "Harassment"
+        case .unsafeBehavior: "Unsafe behavior"
+        case .spam: "Spam"
+        case .fakeProfile: "Fake profile"
+        case .other: "Other"
         }
     }
 }
@@ -610,6 +657,7 @@ final class AccountSessionStore: ObservableObject {
             return
         }
         try await RallyUpBackend.client.functions.invoke("delete-account")
+        try? await RallyUpBackend.client.auth.signOut()
         currentAccount = nil
         isDemoMode = false
         isCloudBacked = false
@@ -632,13 +680,101 @@ final class AccountSessionStore: ObservableObject {
         defaults.removeObject(forKey: activeEmailKey)
     }
 
-    func refreshDiscoverablePlayers() async -> [PlayerProfile] {
+    func registerPushToken(_ token: String) {
+        guard isCloudBacked, let userID = currentAccount?.id, !token.isEmpty else { return }
+        Task {
+            let now = ISO8601DateFormatter().string(from: .now)
+            let existing: [SupabasePushTokenOwner] = (try? await RallyUpBackend.client
+                .from("device_push_tokens")
+                .select("user_id")
+                .eq("device_token", value: token)
+                .limit(1)
+                .execute()
+                .value) ?? []
+
+            if existing.first?.user_id == userID {
+                let refresh = SupabasePushTokenRefresh(last_seen_at: now)
+                try? await RallyUpBackend.client
+                    .from("device_push_tokens")
+                    .update(refresh)
+                    .eq("device_token", value: token)
+                    .eq("user_id", value: userID.uuidString)
+                    .execute()
+            } else if existing.isEmpty {
+                let record = SupabasePushTokenRecord(
+                    user_id: userID,
+                    device_token: token,
+                    platform: "ios",
+                    last_seen_at: now
+                )
+                try? await RallyUpBackend.client.from("device_push_tokens").insert(record).execute()
+            }
+        }
+    }
+
+    func updateProfile(
+        displayName: String,
+        skillLevel: SkillLevel,
+        availabilitySummary: String,
+        homeArea: String?
+    ) async throws {
+        guard let account = currentAccount else { return }
+        let update = SupabaseProfileBasicsUpdate(
+            display_name: String(displayName.trimmingCharacters(in: .whitespacesAndNewlines).prefix(60)),
+            skill_level: skillLevel.rawValue,
+            home_area: homeArea,
+            availability_summary: String(availabilitySummary.trimmingCharacters(in: .whitespacesAndNewlines).prefix(120))
+        )
+        try await RallyUpBackend.client
+            .from("profiles")
+            .update(update)
+            .eq("user_id", value: account.id.uuidString)
+            .execute()
+        currentAccount = try await fetchProfile(userID: account.id, email: account.email)
+    }
+
+    func blockPlayer(_ playerID: UUID) async throws {
+        let params: [String: AnyJSON] = ["p_player_id": .string(playerID.uuidString)]
+        _ = try await RallyUpBackend.client.rpc("block_player", params: params).execute()
+    }
+
+    func unblockPlayer(_ playerID: UUID) async throws {
+        let params: [String: AnyJSON] = ["p_player_id": .string(playerID.uuidString)]
+        _ = try await RallyUpBackend.client.rpc("unblock_player", params: params).execute()
+    }
+
+    func reportPlayer(
+        _ playerID: UUID,
+        reason: PlayerReportReason,
+        details: String = "",
+        matchID: UUID? = nil
+    ) async throws {
+        let params: [String: AnyJSON] = [
+            "p_player_id": .string(playerID.uuidString),
+            "p_reason": .string(reason.rawValue),
+            "p_details": .string(String(details.prefix(2_000))),
+            "p_match_id": matchID.map { .string($0.uuidString) } ?? .null,
+        ]
+        let _: UUID = try await RallyUpBackend.client.rpc("report_player", params: params).execute().value
+    }
+
+    func refreshDiscoverablePlayers(
+        searchQuery: String? = nil,
+        skillLevel: SkillLevel? = nil
+    ) async -> [PlayerProfile] {
         guard let session = try? await RallyUpBackend.client.auth.session else { return [] }
         do {
+            let availabilityTerms = ["Weekdays", "Weekends", "Evenings"].filter {
+                currentAccount?.availabilitySummary.localizedCaseInsensitiveContains($0) == true
+            }
+            let params: [String: AnyJSON] = [
+                "p_search_query": searchQuery.map { .string($0) } ?? .null,
+                "p_skill_level": skillLevel.map { .string($0.rawValue) } ?? .null,
+                "p_area": currentAccount?.homeArea.map { .string($0) } ?? .null,
+                "p_availability_terms": .array(availabilityTerms.map { .string($0) }),
+            ]
             let profiles: [SupabaseProfileRecord] = try await RallyUpBackend.client
-                .from("profiles")
-                .select("user_id,display_name,skill_level,home_area,availability_summary,avatar_path,player_strengths,profile_rackets(id,user_id,position,name,photo_path)")
-                .eq("is_discoverable", value: true)
+                .rpc("discover_profiles", params: params)
                 .execute()
                 .value
 
@@ -1032,7 +1168,8 @@ final class RallyStore: ObservableObject {
             return
         }
         activeAccountID = account?.id
-        players = DemoData.players
+        players = cloudBacked ? [] : DemoData.players
+        courts = cloudBacked ? [] : DemoData.courts
 
         if let account {
             if let savedProfile = defaults.data(forKey: currentProfileKey),
@@ -1060,6 +1197,8 @@ final class RallyStore: ObservableObject {
             if let saved = defaults.data(forKey: currentMatchesKey),
                let decoded = try? JSONDecoder().decode([MatchRecord].self, from: saved) {
                 matches = decoded
+            } else if cloudBacked {
+                matches = []
             } else {
                 matches = demoMatches(for: currentUser)
             }
@@ -1087,6 +1226,7 @@ final class RallyStore: ObservableObject {
         }
         if cloudBacked {
             Task {
+                await refreshRemoteCourts()
                 await refreshRemoteMatches()
                 await startRealtimeMatchSync()
             }
@@ -1108,6 +1248,33 @@ final class RallyStore: ObservableObject {
             }
         } catch {
             syncError = "Live score sync is unavailable right now."
+        }
+    }
+
+    private func refreshRemoteCourts() async {
+        guard cloudBacked else { return }
+        do {
+            let rows: [SupabaseCourtRecord] = try await RallyUpBackend.client
+                .from("courts")
+                .select("id,name,address,surface,setting,latitude,longitude")
+                .eq("is_active", value: true)
+                .order("area", ascending: true)
+                .order("name", ascending: true)
+                .execute()
+                .value
+            courts = rows.map {
+                TennisCourt(
+                    id: $0.id,
+                    name: $0.name,
+                    address: $0.address,
+                    surface: $0.surface,
+                    setting: $0.setting,
+                    latitude: $0.latitude,
+                    longitude: $0.longitude
+                )
+            }
+        } catch {
+            syncError = "Courts couldn’t be refreshed right now."
         }
     }
 
@@ -1235,9 +1402,20 @@ final class RallyStore: ObservableObject {
         syncError = error.localizedDescription
     }
 
+    private func sendMatchPush(matchID: UUID, event: String) async {
+        let request = MatchPushRequest(match_id: matchID, event: event)
+        try? await RallyUpBackend.client.functions.invoke(
+            "send-match-push",
+            options: FunctionInvokeOptions(body: request)
+        )
+    }
+
     func setDiscoverablePlayers(_ remotePlayers: [PlayerProfile]) {
-        let remoteIDs = Set(remotePlayers.map(\.id))
-        players = remotePlayers + DemoData.players.filter { !remoteIDs.contains($0.id) }
+        players = remotePlayers
+    }
+
+    func removePlayer(_ playerID: UUID) {
+        players.removeAll { $0.id == playerID }
     }
 
     var upcomingMatches: [MatchRecord] {
@@ -1313,7 +1491,8 @@ final class RallyStore: ObservableObject {
                         "p_note": note.map(AnyJSON.string) ?? .null,
                     ]
                     params["p_teammate_id"] = teammate.map { .string($0.id.uuidString) } ?? .null
-                    _ = try await RallyUpBackend.client.rpc("create_match_invite", params: params).execute()
+                    let matchID: UUID = try await RallyUpBackend.client.rpc("create_match_invite", params: params).execute().value
+                    await sendMatchPush(matchID: matchID, event: "invite")
                     await refreshRemoteMatches()
                 } catch {
                     reportSyncError(error)
@@ -1522,6 +1701,7 @@ final class RallyStore: ObservableObject {
                         "respond_to_match_invite",
                         params: params
                     ).execute()
+                    await sendMatchPush(matchID: matchID, event: "response")
                     await refreshRemoteMatches()
                 } catch { reportSyncError(error) }
             }
