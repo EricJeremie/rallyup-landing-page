@@ -4,54 +4,50 @@ import { useEffect } from "react";
 
 export function MotionLayer() {
   useEffect(() => {
+    const root = document.documentElement;
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const revealNodes = Array.from(document.querySelectorAll<HTMLElement>("[data-reveal]"));
     const parallaxNodes = Array.from(document.querySelectorAll<HTMLElement>("[data-parallax]"));
     const tiltNodes = Array.from(document.querySelectorAll<HTMLElement>("[data-tilt]"));
+    let observer: IntersectionObserver | null = null;
+    let frame = 0;
+
+    root.classList.add("motion-ready");
 
     if (reducedMotion) {
       revealNodes.forEach((node) => node.classList.add("is-visible"));
     } else {
-      const observer = new IntersectionObserver(
+      observer = new IntersectionObserver(
         (entries) => {
           entries.forEach((entry) => {
             if (entry.isIntersecting) {
               (entry.target as HTMLElement).classList.add("is-visible");
-              observer.unobserve(entry.target);
+              observer?.unobserve(entry.target);
             }
           });
         },
         { rootMargin: "0px 0px -10% 0px", threshold: 0.12 },
       );
-      revealNodes.forEach((node) => observer.observe(node));
+      revealNodes.forEach((node) => observer?.observe(node));
+    }
 
-      const updateScroll = () => {
-        const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-        const progress = maxScroll > 0 ? window.scrollY / maxScroll : 0;
-        document.documentElement.style.setProperty("--scroll-progress", progress.toFixed(3));
+    const updateScroll = () => {
+      const maxScroll = root.scrollHeight - window.innerHeight;
+      const progress = maxScroll > 0 ? window.scrollY / maxScroll : 0;
+      root.style.setProperty("--scroll-progress", progress.toFixed(3));
 
+      if (!reducedMotion) {
         parallaxNodes.forEach((node) => {
           const speed = Number(node.dataset.parallax ?? 0);
           const rect = node.getBoundingClientRect();
           const distanceFromCenter = rect.top + rect.height / 2 - window.innerHeight / 2;
           node.style.setProperty("--parallax-y", `${Math.round(distanceFromCenter * speed * -0.12)}px`);
         });
-      };
-      let frame = 0;
-      const onScroll = () => {
-        if (!frame) frame = requestAnimationFrame(() => { frame = 0; updateScroll(); });
-      };
-      updateScroll();
-      window.addEventListener("scroll", onScroll, { passive: true });
-      window.addEventListener("resize", onScroll);
-
-      return () => {
-        observer.disconnect();
-        window.removeEventListener("scroll", onScroll);
-        window.removeEventListener("resize", onScroll);
-        if (frame) cancelAnimationFrame(frame);
-      };
-    }
+      }
+    };
+    const onScroll = () => {
+      if (!frame) frame = requestAnimationFrame(() => { frame = 0; updateScroll(); });
+    };
 
     const onPointerMove = (event: PointerEvent) => {
       const node = event.currentTarget as HTMLElement;
@@ -67,6 +63,9 @@ export function MotionLayer() {
       node.style.setProperty("--tilt-y", "0deg");
     };
 
+    updateScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
     if (!reducedMotion && window.matchMedia("(hover: hover)").matches) {
       tiltNodes.forEach((node) => {
         node.addEventListener("pointermove", onPointerMove);
@@ -75,10 +74,15 @@ export function MotionLayer() {
     }
 
     return () => {
+      observer?.disconnect();
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
       tiltNodes.forEach((node) => {
         node.removeEventListener("pointermove", onPointerMove);
         node.removeEventListener("pointerleave", resetTilt);
       });
+      if (frame) cancelAnimationFrame(frame);
+      root.classList.remove("motion-ready");
     };
   }, []);
 

@@ -1,229 +1,133 @@
 import Image from "next/image";
-import type { CSSProperties } from "react";
-import {
-  ArrowDownRight,
-  ArrowRight,
-  ChartNoAxesCombined,
-  MapPin,
-  Search,
-  Swords,
-} from "lucide-react";
+import { ArrowDownRight, ArrowRight, Check, Swords, Trophy, UsersRound } from "lucide-react";
+
 import { ComingSoonButton } from "@/components/coming-soon-button";
 import { MotionLayer } from "@/components/motion-layer";
+import { ScreenTour } from "@/components/screen-tour";
 
-type PhoneProps = {
-  src: string;
-  alt: string;
-  className?: string;
-  priority?: boolean;
-};
+const featureRows = [
+  { number: "01", kicker: "PEOPLE", title: "Find your kind of player", body: "Discover nearby players by level, availability, and the way you like to compete.", icon: UsersRound },
+  { number: "02", kicker: "PLAY", title: "Make every match count", body: "Set up the match, keep score point by point, and stay in the moment.", icon: Swords },
+  { number: "03", kicker: "PROGRESS", title: "See your game grow", body: "Keep your record, rivalries, and performance in one place.", icon: Trophy },
+];
 
-function IPhone({ src, alt, className = "", priority = false }: PhoneProps) {
+function IPhone({ src, alt, className = "", priority = false }: { src: string; alt: string; className?: string; priority?: boolean }) {
   return (
-    <div className={`iphone-mockup ${className}`}>
+    <div className={`iphone-mockup ${className}`} data-tilt>
       <div className="iphone-screen">
-        <Image
-          src={src}
-          alt={alt}
-          fill
-          priority={priority}
-          sizes="(max-width: 700px) 42vw, 260px"
-          className="iphone-screen-image"
-        />
+        <Image src={src} alt={alt} fill priority={priority} sizes="(max-width: 700px) 46vw, 310px" className="iphone-screen-image" />
         <span className="iphone-island" aria-hidden="true" />
       </div>
     </div>
   );
 }
 
-const features = [
-  {
-    number: "01",
-    icon: Search,
-    title: "Find your kind of player",
-    text: "Meet nearby players by level, availability, and the way you like to play.",
-  },
-  {
-    number: "02",
-    icon: Swords,
-    title: "Make every match count",
-    text: "Set up a match, keep score point by point, and revisit the result after the last ball.",
-  },
-  {
-    number: "03",
-    icon: ChartNoAxesCombined,
-    title: "See your game grow",
-    text: "Keep your record, head-to-head history, and performance in one place.",
-  },
-];
-
 export default function LandingPage() {
   return (
-    <main className="landing-page" id="top">
+    <main className="landing-page court-energy" id="top">
       <MotionLayer />
       <div className="scroll-progress" aria-hidden="true"><span /></div>
-      <header className="marketing-header">
+
+      <header className="marketing-header court-header">
         <a className="marketing-logo" href="/" aria-label="RallyUp home">
-          <Image
-            src="/assets/branding/rallyup-logo-horizontal.svg"
-            alt="RallyUp — Play, People, Progress"
-            width={230}
-            height={53}
-            priority
-          />
+          <Image src="/assets/branding/rallyup-logo.svg" alt="RallyUp" width={150} height={65} priority />
         </a>
         <nav className="marketing-nav" aria-label="Main navigation">
-          <a href="#features">Features</a>
-          <a href="#screens">The app</a>
+          <a href="#play">Play</a>
+          <a href="#people">People</a>
+          <a href="#progress">Progress</a>
           <ComingSoonButton className="nav-cta" />
         </nav>
       </header>
 
-      <section className="hero-panel" aria-labelledby="hero-title">
-        <span className="hero-rings parallax-layer" data-parallax="0.16" aria-hidden="true" />
-        <div className="hero-copy" data-reveal="fade-up">
-          <p className="hero-kicker"><Image src="/assets/branding/rallyup-ball.svg" alt="" width={18} height={18} /> Tennis is better together</p>
-          <h1 id="hero-title">More tennis.<br /><em>Better days.</em></h1>
-          <p className="hero-description">
-            Find your next hitting partner, make a match, and keep your game moving with RallyUp.
-          </p>
-          <div className="hero-actions">
-            <a className="button-lime" href="#features">
-              See what you can do <ArrowRight aria-hidden="true" />
-            </a>
-            <a className="text-link-light" href="#screens">
-              Take a look around <ArrowDownRight aria-hidden="true" />
-            </a>
+      <section className="court-hero" aria-labelledby="hero-title">
+        <div className="court-hero-photo parallax-layer" data-parallax="0.06" aria-hidden="true">
+          <Image src="/images/tennis/forehand-hard-court.webp" alt="" fill priority sizes="(max-width: 680px) 100vw, 58vw" />
+        </div>
+        <div className="court-hero-wash" aria-hidden="true" />
+        <div className="court-hero-content" data-reveal="fade-up">
+          <p className="court-kicker"><span /> Play your next point</p>
+          <h1 id="hero-title">Find your<br /><em>rally.</em></h1>
+          <p>RallyUp brings players, courts, and progress together so more days end with a better match.</p>
+          <div className="court-hero-actions">
+            <a className="button-lime" href="#play">Explore the app <ArrowRight aria-hidden="true" /></a>
+            <a className="text-link-light" href="#screens">See it in motion <ArrowDownRight aria-hidden="true" /></a>
           </div>
-          <div className="hero-brand-line"><span>PLAY</span><i /><span>PEOPLE</span><i /><span>PROGRESS</span></div>
+          <div className="court-hero-meta"><span>01</span><i /><span>PLAY</span><i /><span>PEOPLE</span><i /><span>PROGRESS</span></div>
         </div>
-
-        <div className="hero-phones parallax-layer" data-parallax="0.08" aria-label="RallyUp app screen previews">
-          <IPhone
-            src="/images/screens/find-players.png"
-            alt="RallyUp Find Players screen with nearby tennis players and match filters"
-            className="hero-phone hero-phone-back"
-            priority
-          />
-          <IPhone
-            src="/images/screens/home.png"
-            alt="RallyUp home screen showing a next match, quick actions, and player record"
-            className="hero-phone hero-phone-front"
-            priority
-          />
-          <span className="hero-orbit hero-orbit-one parallax-layer" data-parallax="0.2" aria-hidden="true" />
-          <span className="hero-orbit hero-orbit-two parallax-layer" data-parallax="0.28" aria-hidden="true" />
+        <div className="court-hero-phone" data-reveal="fade-up">
+          <IPhone src="/images/screens/home.png" alt="RallyUp home screen with a next match and quick actions" className="court-phone" priority />
+          <span className="court-phone-caption">Your next match starts here</span>
         </div>
-        <a className="hero-scroll-cue" href="#features" aria-label="Scroll to RallyUp features">
-          <ArrowDownRight aria-hidden="true" />
-        </a>
+        <a className="court-scroll" href="#play" aria-label="Scroll to RallyUp features"><span>Scroll to rally</span><ArrowDownRight aria-hidden="true" /></a>
       </section>
 
-      <section className="feature-section section-wrap" id="features" aria-labelledby="features-title">
-        <div className="section-intro" data-reveal="fade-up">
-          <p className="eyebrow">The game, brought closer</p>
-          <h2 id="features-title">Good games start with good people.</h2>
-          <p>From the first invite to the final point, RallyUp helps you spend less time coordinating and more time on court.</p>
+      <section className="court-intro" id="play" aria-labelledby="intro-title">
+        <div className="court-intro-label" data-reveal="fade-up"><span>RALLYUP / 001</span><span>MADE FOR THE NEXT MATCH</span></div>
+        <div className="court-intro-grid">
+          <h2 id="intro-title" data-reveal="fade-up">Less planning.<br /><strong>More playing.</strong></h2>
+          <div data-reveal="fade-up">
+            <p className="court-lead">The best part of tennis is the part between “we should play” and the first ball. RallyUp gets you there faster.</p>
+            <div className="court-checks">
+              <span><Check aria-hidden="true" /> Find a fit</span>
+              <span><Check aria-hidden="true" /> Start a match</span>
+              <span><Check aria-hidden="true" /> Keep your story</span>
+            </div>
+          </div>
         </div>
-        <div className="feature-list">
-          {features.map(({ number, icon: Icon, title, text }) => (
-            <article className="feature-row" key={number} data-reveal="fade-up" style={{ "--reveal-delay": `${Number(number) * 70}ms` } as CSSProperties}>
-              <span className="feature-number">{number}</span>
-              <span className="feature-icon"><Icon aria-hidden="true" /></span>
-              <div>
-                <h3>{title}</h3>
-                <p>{text}</p>
-              </div>
-              <ArrowRight className="feature-arrow" aria-hidden="true" />
+      </section>
+
+      <section className="court-feature-rail" id="people" aria-labelledby="feature-title">
+        <div className="court-feature-sticky" data-reveal="fade-up">
+          <p className="eyebrow">The RallyUp rhythm</p>
+          <h2 id="feature-title">A better way<br />to keep playing.</h2>
+          <p>Three simple moves from finding your people to seeing how far your game has come.</p>
+        </div>
+        <div className="court-feature-list">
+          {featureRows.map(({ number, kicker, title, body, icon: Icon }) => (
+            <article className="court-feature-row" key={number} data-reveal="fade-up">
+              <span className="court-feature-num">{number}</span>
+              <div className="court-feature-icon"><Icon aria-hidden="true" /></div>
+              <div><p className="screen-index">{kicker}</p><h3>{title}</h3><p>{body}</p></div>
+              <ArrowRight className="court-feature-arrow" aria-hidden="true" />
             </article>
           ))}
-          <div className="courts-note" data-reveal="fade-up" style={{ "--reveal-delay": "260ms" } as CSSProperties}>
-            <span className="courts-note-icon"><MapPin aria-hidden="true" /></span>
-            <p><strong>Need a place to play?</strong><br />Find nearby courts and save your favorite spots.</p>
-            <a href="#screens" aria-label="See RallyUp court finder screen"><ArrowRight aria-hidden="true" /></a>
-          </div>
         </div>
       </section>
 
-      <section className="screens-section" id="screens" aria-labelledby="screens-title">
-        <div className="screens-heading section-wrap" data-reveal="fade-up">
-          <div>
-            <p className="eyebrow eyebrow-light">A closer look</p>
-            <h2 id="screens-title">Made for the moments<br />that make the match.</h2>
-          </div>
-          <p>Clear before you play. Simple while you play. Useful when you look back.</p>
+      <section className="court-tour-section" id="screens" aria-labelledby="tour-title">
+        <div className="court-tour-heading" data-reveal="fade-up">
+          <p className="eyebrow eyebrow-light">A closer look</p>
+          <h2 id="tour-title">Made for the<br /><em>next point.</em></h2>
+          <p>Tap through the parts of RallyUp that make getting on court feel easy.</p>
         </div>
+        <ScreenTour />
+      </section>
 
-        <div className="screen-showcase section-wrap">
-          <article className="screen-feature screen-feature-score" data-reveal="fade-up">
-            <div className="showcase-phone-wrap">
-              <IPhone
-                src="/images/screens/live-scoring.png"
-                alt="RallyUp live match scoring screen with player score and point controls"
-                className="showcase-phone"
-              />
-            </div>
-            <div className="screen-caption">
-              <p className="screen-index">01 / ON COURT</p>
-              <h3>Keep your eyes<br />on the next point.</h3>
-              <p>Live scoring keeps the match flowing and the score easy to follow.</p>
-            </div>
-          </article>
-
-          <article className="screen-feature screen-feature-courts" data-reveal="fade-up" style={{ "--reveal-delay": "100ms" } as CSSProperties}>
-            <div className="showcase-phone-wrap">
-              <IPhone
-                src="/images/screens/court-locator.png"
-                alt="RallyUp court locator screen with a map and nearby tennis venues"
-                className="showcase-phone"
-              />
-            </div>
-            <div className="screen-caption">
-              <p className="screen-index">02 / FIND A COURT</p>
-              <h3>Your next court,<br />closer than you think.</h3>
-              <p>Explore nearby places to play and get the details before you head out.</p>
-            </div>
-          </article>
-
-          <article className="screen-feature screen-feature-progress" data-reveal="fade-up" style={{ "--reveal-delay": "180ms" } as CSSProperties}>
-            <div className="showcase-phone-wrap">
-              <IPhone
-                src="/images/screens/performance.png"
-                alt="RallyUp performance screen with tennis record, win rate, and match trends"
-                className="showcase-phone"
-              />
-            </div>
-            <div className="screen-caption">
-              <p className="screen-index">03 / YOUR PROGRESS</p>
-              <h3>Every match<br />adds to your story.</h3>
-              <p>Look back on your results, rivalries, and the progress between them.</p>
-            </div>
-          </article>
+      <section className="court-match-moment" id="progress" aria-labelledby="moment-title">
+        <div className="court-moment-photo parallax-layer" data-parallax="0.08">
+          <Image src="/images/tennis/serve-grass-court.webp" alt="Tennis player serving on a grass court" fill sizes="(max-width: 680px) 100vw, 50vw" />
+          <span>Every point leaves a mark.</span>
+        </div>
+        <div className="court-moment-copy" data-reveal="fade-up">
+          <p className="eyebrow">Progress you can feel</p>
+          <h2 id="moment-title">Your game<br /><em>has a story.</em></h2>
+          <p>Match history, head-to-heads, and performance patterns make the time between games count too.</p>
+          <a className="button-dark" href="#screens">Explore your progress <ArrowRight aria-hidden="true" /></a>
         </div>
       </section>
 
-      <section className="closing-section section-wrap" data-reveal="fade-up" aria-labelledby="closing-title">
-        <div>
-          <p className="eyebrow">Play · People · Progress</p>
-          <h2 id="closing-title">Ready when<br />you are.</h2>
-        </div>
+      <section className="court-close" aria-labelledby="close-title" data-reveal="fade-up">
+        <div className="court-close-mark parallax-layer" data-parallax="0.08" aria-hidden="true">R</div>
+        <p className="eyebrow">Play · People · Progress</p>
+        <h2 id="close-title">Your next rally<br /><em>is closer.</em></h2>
         <ComingSoonButton className="button-dark" />
-        <span className="closing-mark parallax-layer" data-parallax="0.08" aria-hidden="true">R</span>
       </section>
 
-      <footer className="marketing-footer section-wrap">
-        <Image
-          src="/assets/branding/rallyup-logo.svg"
-          alt="RallyUp"
-          width={145}
-          height={63}
-        />
+      <footer className="marketing-footer court-footer section-wrap">
+        <Image src="/assets/branding/rallyup-logo.svg" alt="RallyUp" width={145} height={63} />
         <p>Find your people. Play more tennis.</p>
-        <div className="footer-links">
-          <a href="/privacy">Privacy</a>
-          <a href="/terms">Terms</a>
-          <a href="#top">Back to top <ArrowRight aria-hidden="true" /></a>
-        </div>
+        <div className="footer-links"><a href="/privacy">Privacy</a><a href="/terms">Terms</a><a href="#top">Back to top <ArrowRight aria-hidden="true" /></a></div>
       </footer>
     </main>
   );
