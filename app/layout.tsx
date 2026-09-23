@@ -4,9 +4,6 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "RallyUp — More tennis. Better days.",
   description: "Find tennis players, set up a match, find a court, and keep track of your game with RallyUp.",
-  other: {
-    "codex-preview": "development",
-  },
   icons: {
     icon: "/favicon.svg",
     shortcut: "/favicon.svg",

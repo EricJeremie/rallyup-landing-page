@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "rallyup-wordmark.png",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

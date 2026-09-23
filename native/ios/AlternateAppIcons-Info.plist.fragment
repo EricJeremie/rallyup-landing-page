@@ -1,0 +1,26 @@
+<!-- Merge these keys into the iOS target Info.plist to expose the two alternate icons. -->
+<key>CFBundleIcons</key>
+<dict>
+  <key>CFBundlePrimaryIcon</key>
+  <dict>
+    <key>CFBundleIconName</key>
+    <string>AppIcon</string>
+  </dict>
+  <key>CFBundleAlternateIcons</key>
+  <dict>
+    <key>RallyUpGreen</key>
+    <dict>
+      <key>CFBundleIconFiles</key>
+      <array><string>AppIcon-Green</string></array>
+      <key>UIPrerenderedIcon</key>
+      <false/>
+    </dict>
+    <key>RallyUpLight</key>
+    <dict>
+      <key>CFBundleIconFiles</key>
+      <array><string>AppIcon-Light</string></array>
+      <key>UIPrerenderedIcon</key>
+      <false/>
+    </dict>
+  </dict>
+</dict>

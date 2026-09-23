@@ -1,7 +1,6 @@
-"use client";
-
+import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { useState, type ReactNode } from "react";
+import type { ReactNode } from "react";
 
 export function ComingSoonButton({
   className,
@@ -10,17 +9,13 @@ export function ComingSoonButton({
   className: string;
   children?: ReactNode;
 }) {
-  const [comingSoon, setComingSoon] = useState(false);
-
   return (
-    <button
-      type="button"
+    <Link
+      href="/app"
       className={`coming-soon-button ${className}`}
-      onClick={() => setComingSoon(true)}
-      aria-label={comingSoon ? "RallyUp is coming soon" : undefined}
     >
-      {comingSoon ? "Coming Soon" : children}
-      {!comingSoon && <ArrowRight aria-hidden="true" />}
-    </button>
+      {children}
+      <ArrowRight aria-hidden="true" />
+    </Link>
   );
 }

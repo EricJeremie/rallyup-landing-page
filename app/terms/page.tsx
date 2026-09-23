@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export const metadata = {
   title: "Terms & Conditions — RallyUp",
   description: "The terms that apply when you use RallyUp.",
@@ -7,8 +9,8 @@ export default function TermsPage() {
   return (
     <main className="legal-page">
       <header className="legal-header">
-        <a href="/" className="legal-brand">Rally<span>Up</span></a>
-        <a href="/" className="legal-back">Back to RallyUp</a>
+        <Link href="/" className="legal-brand">Rally<span>Up</span></Link>
+        <Link href="/" className="legal-back">Back to RallyUp</Link>
       </header>
       <article className="legal-document">
         <p className="legal-eyebrow">RallyUp / Terms</p>
@@ -49,7 +51,7 @@ export default function TermsPage() {
 
         <div className="legal-footer-note">
           <a href="/privacy">Read the Privacy Policy <span aria-hidden="true">→</span></a>
-          <a href="/">Return home <span aria-hidden="true">→</span></a>
+          <Link href="/">Return home <span aria-hidden="true">→</span></Link>
         </div>
       </article>
     </main>

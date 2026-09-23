@@ -1,6 +1,7 @@
 import Image from "next/image";
+import Link from "next/link";
 import type { CSSProperties } from "react";
-import { ArrowDownRight, ArrowRight, Check, Swords, Trophy, UsersRound } from "lucide-react";
+import { ArrowDownRight, ArrowRight, Swords, Trophy, UsersRound } from "lucide-react";
 
 import { ComingSoonButton } from "@/components/coming-soon-button";
 import { MotionLayer } from "@/components/motion-layer";
@@ -30,9 +31,9 @@ export default function LandingPage() {
       <div className="scroll-progress" aria-hidden="true"><span /></div>
 
       <header className="marketing-header luxe-header">
-        <a className="luxe-logo" href="/" aria-label="RallyUp home">
-          <Image src="/assets/branding/rallyup-logo.svg" alt="RallyUp" width={150} height={65} priority />
-        </a>
+          <Link className="luxe-logo" href="/" aria-label="RallyUp home">
+            <Image src="/assets/branding/rallyup-logo.svg" alt="RallyUp" width={150} height={65} priority />
+          </Link>
         <nav className="luxe-nav" aria-label="Main navigation">
           <a href="#philosophy">The game</a>
           <a href="#screens">RallyUp</a>
@@ -122,7 +123,7 @@ export default function LandingPage() {
         <div className="luxe-footer-top">
           <Image src="/assets/branding/rallyup-logo.svg" alt="RallyUp" width={145} height={63} />
           <p>Find your people. Play more tennis.</p>
-          <div><a href="/privacy">Privacy</a><a href="/terms">Terms</a><a href="#top">Back to top <ArrowRight aria-hidden="true" /></a></div>
+          <div><Link href="/privacy">Privacy</Link><Link href="/terms">Terms</Link><a href="#top">Back to top <ArrowRight aria-hidden="true" /></a></div>
         </div>
         <span className="luxe-footer-note">PLAY · PEOPLE · PROGRESS</span>
       </footer>

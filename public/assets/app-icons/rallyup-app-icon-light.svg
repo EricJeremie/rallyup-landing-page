@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024" role="img" aria-labelledby="title desc">
+    <title id="title">RallyUp light app icon</title><desc id="desc">Square RallyUp mobile app icon. Keep the full-bleed square artwork; the operating system applies its platform-specific icon mask.</desc><rect width="1024" height="1024" fill="#F8F8F5"/>
+    <g transform="translate(72 178) scale(2.2)">
+      <path d="M 35 145 C 94 73, 199 70, 269 129 C 212 96, 111 95, 40 149 Z" fill="#0F2B1F"/>
+    <path d="M 284 138 C 294 123, 305 107, 316 93" fill="none" stroke="#0F2B1F" stroke-width="9" stroke-linecap="round"/>
+    <circle cx="334" cy="72" r="31" fill="#A7E632"/><path d="M 306.72 77.58 C 322.22 89.36, 332.45 79.44, 339.58 63.32 C 346.4 49.68, 354.15 52.78, 361.9 57.120000000000005" fill="none" stroke="#F8F8F5" stroke-width="5.5" stroke-linecap="round"/>
+    <path d="M0.305 0.000 L25.391 151.328 L90.594 151.328 Q107.453 151.328 119.082 145.184 Q130.711 139.039 135.840 127.512 Q140.969 115.984 138.328 99.938 Q135.688 84.195 127.055 73.227 Q118.422 62.258 105.320 56.469 L126.852 0.000 L82.164 0.000 L63.781 49.969 L49.563 49.969 L41.336 0.000 Z M54.844 81.859 L69.266 81.859 Q80.133 81.859 86.988 86.023 Q93.844 90.188 95.469 99.938 Q97.094 109.586 91.660 114.004 Q86.227 118.422 75.359 118.422 L60.938 118.422 Z" transform="translate(75 263) scale(1.2739541160593792 -1)" fill="#0F2B1F"/>
+    </g>
+  </svg>
