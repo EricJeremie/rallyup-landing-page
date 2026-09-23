@@ -1,4 +1,5 @@
 import Image from "next/image";
+import type { CSSProperties } from "react";
 import { ArrowDownRight, ArrowRight, Check, Swords, Trophy, UsersRound } from "lucide-react";
 
 import { ComingSoonButton } from "@/components/coming-soon-button";
@@ -24,110 +25,106 @@ function IPhone({ src, alt, className = "", priority = false }: { src: string; a
 
 export default function LandingPage() {
   return (
-    <main className="landing-page court-energy" id="top">
+    <main className="landing-page club-luxe" id="top">
       <MotionLayer />
       <div className="scroll-progress" aria-hidden="true"><span /></div>
 
-      <header className="marketing-header court-header">
-        <a className="marketing-logo" href="/" aria-label="RallyUp home">
+      <header className="marketing-header luxe-header">
+        <a className="luxe-logo" href="/" aria-label="RallyUp home">
           <Image src="/assets/branding/rallyup-logo.svg" alt="RallyUp" width={150} height={65} priority />
         </a>
-        <nav className="marketing-nav" aria-label="Main navigation">
-          <a href="#play">Play</a>
-          <a href="#people">People</a>
-          <a href="#progress">Progress</a>
-          <ComingSoonButton className="nav-cta" />
+        <nav className="luxe-nav" aria-label="Main navigation">
+          <a href="#philosophy">The game</a>
+          <a href="#screens">RallyUp</a>
+          <a href="#progress">The details</a>
+          <ComingSoonButton className="luxe-nav-cta" />
         </nav>
       </header>
 
-      <section className="court-hero" aria-labelledby="hero-title">
-        <div className="court-hero-photo parallax-layer" data-parallax="0.06" aria-hidden="true">
-          <Image src="/images/tennis/forehand-hard-court.webp" alt="" fill priority sizes="(max-width: 680px) 100vw, 58vw" />
-        </div>
-        <div className="court-hero-wash" aria-hidden="true" />
-        <div className="court-hero-content" data-reveal="fade-up">
-          <p className="court-kicker"><span /> Play your next point</p>
-          <h1 id="hero-title">Find your<br /><em>rally.</em></h1>
-          <p>RallyUp brings players, courts, and progress together so more days end with a better match.</p>
-          <div className="court-hero-actions">
-            <a className="button-lime" href="#play">Explore the app <ArrowRight aria-hidden="true" /></a>
-            <a className="text-link-light" href="#screens">See it in motion <ArrowDownRight aria-hidden="true" /></a>
+      <section className="luxe-hero" aria-labelledby="hero-title">
+        <div className="luxe-hero-copy" data-reveal="fade-up">
+          <p className="luxe-overline"><span /> THE GAME, WELL PLAYED</p>
+          <h1 id="hero-title">Tennis<br />starts<br />together.</h1>
+          <p>Good people. A court nearby. Every point remembered.</p>
+          <div className="luxe-hero-actions">
+            <a className="luxe-primary" href="#philosophy">Discover RallyUp <ArrowDownRight aria-hidden="true" /></a>
+            <span className="luxe-edition">A NEW WAY TO FIND YOUR MATCH</span>
           </div>
-          <div className="court-hero-meta"><span>01</span><i /><span>PLAY</span><i /><span>PEOPLE</span><i /><span>PROGRESS</span></div>
         </div>
-        <div className="court-hero-phone" data-reveal="fade-up">
-          <IPhone src="/images/screens/home.png" alt="RallyUp home screen with a next match and quick actions" className="court-phone" priority />
-          <span className="court-phone-caption">Your next match starts here</span>
+        <div className="luxe-hero-image parallax-layer" data-parallax="0.035">
+          <Image src="/images/tennis/forehand-hard-court.webp" alt="A tennis player reaching for a forehand on a hard court" fill priority sizes="(max-width: 680px) 100vw, 62vw" />
+          <span className="luxe-image-caption"><i /> FIG. 01 <span>THE MOMENT BEFORE THE POINT</span></span>
         </div>
-        <a className="court-scroll" href="#play" aria-label="Scroll to RallyUp features"><span>Scroll to rally</span><ArrowDownRight aria-hidden="true" /></a>
-      </section>
-
-      <section className="court-intro" id="play" aria-labelledby="intro-title">
-        <div className="court-intro-label" data-reveal="fade-up"><span>RALLYUP / 001</span><span>MADE FOR THE NEXT MATCH</span></div>
-        <div className="court-intro-grid">
-          <h2 id="intro-title" data-reveal="fade-up">Less planning.<br /><strong>More playing.</strong></h2>
-          <div data-reveal="fade-up">
-            <p className="court-lead">The best part of tennis is the part between “we should play” and the first ball. RallyUp gets you there faster.</p>
-            <div className="court-checks">
-              <span><Check aria-hidden="true" /> Find a fit</span>
-              <span><Check aria-hidden="true" /> Start a match</span>
-              <span><Check aria-hidden="true" /> Keep your story</span>
-            </div>
-          </div>
+        <div className="luxe-hero-index" aria-hidden="true">RALLYUP · 001</div>
+        <div className="luxe-hero-phone" data-reveal="fade-up">
+          <IPhone src="/images/screens/home.png" alt="RallyUp home screen with an upcoming match and player record" className="luxe-phone" priority />
+          <span className="luxe-phone-note">Your next match,<br />already in motion.</span>
         </div>
       </section>
 
-      <section className="court-feature-rail" id="people" aria-labelledby="feature-title">
-        <div className="court-feature-sticky" data-reveal="fade-up">
-          <p className="eyebrow">The RallyUp rhythm</p>
-          <h2 id="feature-title">A better way<br />to keep playing.</h2>
-          <p>Three simple moves from finding your people to seeing how far your game has come.</p>
+      <div className="luxe-marquee" aria-label="Play, people, progress">
+        <div><span>PLAY</span><i /> <span>PEOPLE</span><i /> <span>PROGRESS</span><i /> <span>PLAY</span><i /> <span>PEOPLE</span><i /> <span>PROGRESS</span></div>
+      </div>
+
+      <section className="luxe-philosophy" id="philosophy" aria-labelledby="philosophy-title">
+        <div className="luxe-section-meta" data-reveal="fade-up"><span>THE RALLYUP PHILOSOPHY</span><span>01 — 03</span></div>
+        <div className="luxe-philosophy-grid">
+          <h2 id="philosophy-title" data-reveal="fade-up">A better match<br />begins before<br />the first serve.</h2>
+          <div className="luxe-philosophy-copy" data-reveal="fade-up">
+            <p>RallyUp brings the parts of tennis together: finding the right people, choosing where to play, and keeping the progress you make along the way.</p>
+            <a className="luxe-text-link" href="#screens">Meet the app <ArrowRight aria-hidden="true" /></a>
+          </div>
         </div>
-        <div className="court-feature-list">
-          {featureRows.map(({ number, kicker, title, body, icon: Icon }) => (
-            <article className="court-feature-row" key={number} data-reveal="fade-up">
-              <span className="court-feature-num">{number}</span>
-              <div className="court-feature-icon"><Icon aria-hidden="true" /></div>
-              <div><p className="screen-index">{kicker}</p><h3>{title}</h3><p>{body}</p></div>
-              <ArrowRight className="court-feature-arrow" aria-hidden="true" />
+        <div className="luxe-feature-list" id="people">
+          {featureRows.map(({ number, kicker, title, body, icon: Icon }, index) => (
+            <article className="luxe-feature-row" key={number} data-reveal="fade-up" style={{ "--reveal-delay": `${index * 80}ms` } as CSSProperties}>
+              <span className="luxe-feature-number">{number}</span>
+              <Icon aria-hidden="true" />
+              <p className="luxe-feature-label">{kicker}</p>
+              <div><h3>{title}</h3><p>{body}</p></div>
+              <ArrowRight className="luxe-feature-arrow" aria-hidden="true" />
             </article>
           ))}
         </div>
       </section>
 
-      <section className="court-tour-section" id="screens" aria-labelledby="tour-title">
-        <div className="court-tour-heading" data-reveal="fade-up">
-          <p className="eyebrow eyebrow-light">A closer look</p>
-          <h2 id="tour-title">Made for the<br /><em>next point.</em></h2>
-          <p>Tap through the parts of RallyUp that make getting on court feel easy.</p>
+      <section className="luxe-tour" id="screens" aria-labelledby="tour-title">
+        <div className="luxe-tour-head" data-reveal="fade-up">
+          <div><p className="luxe-overline"><span /> INSIDE RALLYUP</p><h2 id="tour-title">Every part<br />in its place.</h2></div>
+          <p>Considered for the moments around the match, and the ones that happen on court.</p>
         </div>
         <ScreenTour />
+        <div className="luxe-tour-foot"><span>SELECT A CHAPTER</span><span>02 — 04</span></div>
       </section>
 
-      <section className="court-match-moment" id="progress" aria-labelledby="moment-title">
-        <div className="court-moment-photo parallax-layer" data-parallax="0.08">
-          <Image src="/images/tennis/serve-grass-court.webp" alt="Tennis player serving on a grass court" fill sizes="(max-width: 680px) 100vw, 50vw" />
-          <span>Every point leaves a mark.</span>
+      <section className="luxe-progress" id="progress" aria-labelledby="progress-title">
+        <div className="luxe-progress-image parallax-layer" data-parallax="0.04">
+          <Image src="/images/tennis/serve-grass-court.webp" alt="A tennis player preparing a grass-court serve" fill sizes="(max-width: 680px) 100vw, 50vw" />
+          <span>THE LONG GAME · FIG. 02</span>
         </div>
-        <div className="court-moment-copy" data-reveal="fade-up">
-          <p className="eyebrow">Progress you can feel</p>
-          <h2 id="moment-title">Your game<br /><em>has a story.</em></h2>
-          <p>Match history, head-to-heads, and performance patterns make the time between games count too.</p>
-          <a className="button-dark" href="#screens">Explore your progress <ArrowRight aria-hidden="true" /></a>
+        <div className="luxe-progress-copy" data-reveal="fade-up">
+          <p className="luxe-overline"><span /> A GAME THAT ADDS UP</p>
+          <h2 id="progress-title">Keep the<br />whole story.</h2>
+          <p>Every match leaves something behind. RallyUp keeps your scores, your story, and the progress taking shape between games.</p>
+          <a className="luxe-text-link" href="#screens">See your game in view <ArrowRight aria-hidden="true" /></a>
+          <div className="luxe-progress-rule"><span>PLAY WELL</span><i /><span>COME BACK BETTER</span></div>
         </div>
       </section>
 
-      <section className="court-close" aria-labelledby="close-title" data-reveal="fade-up">
-        <div className="court-close-mark parallax-layer" data-parallax="0.08" aria-hidden="true">R</div>
-        <p className="eyebrow">Play · People · Progress</p>
-        <h2 id="close-title">Your next rally<br /><em>is closer.</em></h2>
-        <ComingSoonButton className="button-dark" />
+      <section className="luxe-close" aria-labelledby="close-title" data-reveal="fade-up">
+        <p className="luxe-overline"><span /> YOUR NEXT MATCH AWAITS</p>
+        <h2 id="close-title">Make time<br />for tennis.</h2>
+        <ComingSoonButton className="luxe-primary luxe-close-cta" />
+        <span className="luxe-close-mark" aria-hidden="true">R</span>
       </section>
 
-      <footer className="marketing-footer court-footer section-wrap">
-        <Image src="/assets/branding/rallyup-logo.svg" alt="RallyUp" width={145} height={63} />
-        <p>Find your people. Play more tennis.</p>
-        <div className="footer-links"><a href="/privacy">Privacy</a><a href="/terms">Terms</a><a href="#top">Back to top <ArrowRight aria-hidden="true" /></a></div>
+      <footer className="luxe-footer">
+        <div className="luxe-footer-top">
+          <Image src="/assets/branding/rallyup-logo.svg" alt="RallyUp" width={145} height={63} />
+          <p>Find your people. Play more tennis.</p>
+          <div><a href="/privacy">Privacy</a><a href="/terms">Terms</a><a href="#top">Back to top <ArrowRight aria-hidden="true" /></a></div>
+        </div>
+        <span className="luxe-footer-note">PLAY · PEOPLE · PROGRESS</span>
       </footer>
     </main>
   );

@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { ArrowRight, MapPin, Search, Swords, Trophy } from "lucide-react";
-import { useState } from "react";
+import { useRef, useState, type KeyboardEvent } from "react";
 
 const screens = [
   {
@@ -49,22 +49,48 @@ const screens = [
 
 export function ScreenTour() {
   const [activeId, setActiveId] = useState<(typeof screens)[number]["id"]>("players");
+  const tabRefs = useRef<Array<HTMLButtonElement | null>>([]);
   const active = screens.find((screen) => screen.id === activeId) ?? screens[0];
   const Icon = active.icon;
+  const selectTab = (index: number) => {
+    const nextIndex = (index + screens.length) % screens.length;
+    setActiveId(screens[nextIndex].id);
+    tabRefs.current[nextIndex]?.focus();
+  };
+  const onTabKeyDown = (event: KeyboardEvent<HTMLButtonElement>, index: number) => {
+    if (event.key === "ArrowRight" || event.key === "ArrowDown") {
+      event.preventDefault();
+      selectTab(index + 1);
+    } else if (event.key === "ArrowLeft" || event.key === "ArrowUp") {
+      event.preventDefault();
+      selectTab(index - 1);
+    } else if (event.key === "Home") {
+      event.preventDefault();
+      selectTab(0);
+    } else if (event.key === "End") {
+      event.preventDefault();
+      selectTab(screens.length - 1);
+    }
+  };
 
   return (
     <div className="screen-tour" data-reveal="fade-up">
       <div className="screen-tour-tabs" role="tablist" aria-label="RallyUp features">
-        {screens.map((screen) => {
+        {screens.map((screen, index) => {
           const TabIcon = screen.icon;
           return (
             <button
               key={screen.id}
               type="button"
+              ref={(node) => { tabRefs.current[index] = node; }}
               role="tab"
               aria-selected={active.id === screen.id}
+              aria-controls="rallyup-tour-panel"
+              id={`rallyup-tour-tab-${screen.id}`}
+              tabIndex={active.id === screen.id ? 0 : -1}
               className={active.id === screen.id ? "is-active" : ""}
               onClick={() => setActiveId(screen.id)}
+              onKeyDown={(event) => onTabKeyDown(event, index)}
             >
               <TabIcon aria-hidden="true" />
               <span>{screen.label}</span>
@@ -72,7 +98,7 @@ export function ScreenTour() {
           );
         })}
       </div>
-      <div className="screen-tour-stage">
+      <div className="screen-tour-stage" role="tabpanel" id="rallyup-tour-panel" aria-labelledby={`rallyup-tour-tab-${active.id}`} tabIndex={0}>
         <div className="screen-tour-copy" key={`${active.id}-copy`}>
           <div className="screen-tour-icon"><Icon aria-hidden="true" /></div>
           <p className="screen-index">{active.eyebrow}</p>
