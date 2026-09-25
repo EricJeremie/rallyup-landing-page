@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "RallyUp — More tennis. Better days.",
-  description: "Find tennis players, set up a match, find a court, and keep track of your game with RallyUp.",
+  title: "RallyUp — Find your people. Play your best game.",
+  description: "Find players, discover courts, play more matches, and track your tennis progress with RallyUp.",
   icons: {
     icon: "/favicon.svg",
     shortcut: "/favicon.svg",

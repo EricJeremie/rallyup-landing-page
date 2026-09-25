@@ -1,24 +1,24 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { CSSProperties } from "react";
-import { ArrowDownRight, ArrowRight, Swords, Trophy, UsersRound } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Check, Swords, Trophy, UsersRound } from "lucide-react";
 
 import { ComingSoonButton } from "@/components/coming-soon-button";
 import { MotionLayer } from "@/components/motion-layer";
 import { ScreenTour } from "@/components/screen-tour";
 
-const featureRows = [
-  { number: "01", kicker: "PEOPLE", title: "Find your kind of player", body: "Discover nearby players by level, availability, and the way you like to compete.", icon: UsersRound },
-  { number: "02", kicker: "PLAY", title: "Make every match count", body: "Set up the match, keep score point by point, and stay in the moment.", icon: Swords },
-  { number: "03", kicker: "PROGRESS", title: "See your game grow", body: "Keep your record, rivalries, and performance in one place.", icon: Trophy },
+const pillars = [
+  { eyebrow: "01 / PEOPLE", title: "Find your people", body: "Match with players who fit your level, schedule, and energy.", icon: UsersRound, tone: "mint" },
+  { eyebrow: "02 / PLAY", title: "Make it to match point", body: "Find a court, invite your crew, and keep the score moving.", icon: Swords, tone: "cream" },
+  { eyebrow: "03 / PROGRESS", title: "See your game grow", body: "Your history, rivalries, and next win—all in one place.", icon: Trophy, tone: "green" },
 ];
 
-function IPhone({ src, alt, className = "", priority = false }: { src: string; alt: string; className?: string; priority?: boolean }) {
+function Phone({ src, alt, className = "" }: { src: string; alt: string; className?: string }) {
   return (
-    <div className={`iphone-mockup ${className}`} data-tilt>
-      <div className="iphone-screen">
-        <Image src={src} alt={alt} fill priority={priority} sizes="(max-width: 700px) 46vw, 310px" className="iphone-screen-image" />
-        <span className="iphone-island" aria-hidden="true" />
+    <div className={`bevel-phone ${className}`}>
+      <div className="bevel-phone-screen">
+        <Image src={src} alt={alt} fill sizes="(max-width: 760px) 58vw, 300px" className="bevel-phone-image" />
+        <span className="bevel-phone-island" aria-hidden="true" />
       </div>
     </div>
   );
@@ -26,107 +26,51 @@ function IPhone({ src, alt, className = "", priority = false }: { src: string; a
 
 export default function LandingPage() {
   return (
-    <main className="landing-page club-luxe" id="top">
+    <main className="bevel-landing" id="top">
       <MotionLayer />
-      <div className="scroll-progress" aria-hidden="true"><span /></div>
 
-      <header className="marketing-header luxe-header">
-          <Link className="luxe-logo" href="/" aria-label="RallyUp home">
-            <Image src="/assets/branding/rallyup-logo.svg" alt="RallyUp" width={150} height={65} priority />
-          </Link>
-        <nav className="luxe-nav" aria-label="Main navigation">
-          <a href="#philosophy">The game</a>
-          <a href="#screens">RallyUp</a>
-          <a href="#progress">The details</a>
-          <ComingSoonButton className="luxe-nav-cta" />
-        </nav>
+      <header className="bevel-header">
+        <Link href="/" className="bevel-logo" aria-label="RallyUp home"><Image src="/assets/branding/rallyup-logo-dark.svg" alt="RallyUp" width={112} height={49} priority /></Link>
+        <nav className="bevel-nav" aria-label="Main navigation"><a href="#product">Product</a><a href="#how-it-works">How it works</a><a href="#progress">Progress</a></nav>
+        <div className="bevel-header-actions"><Link href="/app" className="bevel-login">Log in</Link><ComingSoonButton className="bevel-button bevel-button-small">Get started</ComingSoonButton></div>
       </header>
 
-      <section className="luxe-hero" aria-labelledby="hero-title">
-        <div className="luxe-hero-copy" data-reveal="fade-up">
-          <p className="luxe-overline"><span /> THE GAME, WELL PLAYED</p>
-          <h1 id="hero-title">Tennis<br />starts<br />together.</h1>
-          <p>Good people. A court nearby. Every point remembered.</p>
-          <div className="luxe-hero-actions">
-            <a className="luxe-primary" href="#philosophy">Discover RallyUp <ArrowDownRight aria-hidden="true" /></a>
-            <span className="luxe-edition">A NEW WAY TO FIND YOUR MATCH</span>
-          </div>
+      <section className="bevel-hero" aria-labelledby="hero-title">
+        <div className="bevel-hero-copy" data-reveal="fade-up">
+          <p className="bevel-eyebrow"><span /> THE SOCIAL APP FOR TENNIS</p>
+          <h1 id="hero-title">Find your people.<br /><em>Play your best game.</em></h1>
+          <p className="bevel-hero-lede">RallyUp brings the whole tennis experience together—players, courts, matches, and progress.</p>
+          <div className="bevel-hero-actions"><ComingSoonButton className="bevel-button bevel-button-dark">Get started free</ComingSoonButton><a className="bevel-arrow-link" href="#how-it-works">See how it works <ArrowRight aria-hidden="true" /></a></div>
+          <div className="bevel-hero-meta"><span><Check aria-hidden="true" /> Free to join</span><span><Check aria-hidden="true" /> Made for every level</span></div>
         </div>
-        <div className="luxe-hero-image parallax-layer" data-parallax="0.035">
-          <Image src="/images/tennis/forehand-hard-court.webp" alt="A tennis player reaching for a forehand on a hard court" fill priority sizes="(max-width: 680px) 100vw, 62vw" />
-          <span className="luxe-image-caption"><i /> FIG. 01 <span>THE MOMENT BEFORE THE POINT</span></span>
-        </div>
-        <div className="luxe-hero-index" aria-hidden="true">RALLYUP · 001</div>
-        <div className="luxe-hero-phone" data-reveal="fade-up">
-          <IPhone src="/images/screens/home.png" alt="RallyUp home screen with an upcoming match and player record" className="luxe-phone" priority />
-          <span className="luxe-phone-note">Your next match,<br />already in motion.</span>
+
+        <div className="bevel-hero-art" data-reveal="fade-up">
+          <div className="bevel-art-wash" aria-hidden="true" /><div className="bevel-hero-photo"><Image src="/images/tennis/forehand-hard-court.webp" alt="Tennis player hitting a forehand on a hard court" fill priority sizes="(max-width: 760px) 90vw, 48vw" /></div>
+          <div className="bevel-art-label"><span /> LIVE FROM THE COURT</div><Phone src="/images/screens/home.png" alt="RallyUp home screen showing an upcoming match" className="bevel-phone-hero" /><Phone src="/images/screens/find-players.png" alt="RallyUp find players screen" className="bevel-phone-secondary" />
+          <div className="bevel-floating-score"><span>YOUR RECORD</span><strong>15—9</strong><small>63% win rate <i>↗</i></small></div><span className="bevel-art-number">01</span>
         </div>
       </section>
 
-      <div className="luxe-marquee" aria-label="Play, people, progress">
-        <div><span>PLAY</span><i /> <span>PEOPLE</span><i /> <span>PROGRESS</span><i /> <span>PLAY</span><i /> <span>PEOPLE</span><i /> <span>PROGRESS</span></div>
-      </div>
+      <section className="bevel-proof" aria-label="RallyUp highlights"><p>Everything you need to keep playing</p><div className="bevel-proof-items"><span>Find a match</span><i /><span>Track your progress</span><i /><span>Play more often</span><i /><span>Meet your people</span></div></section>
 
-      <section className="luxe-philosophy" id="philosophy" aria-labelledby="philosophy-title">
-        <div className="luxe-section-meta" data-reveal="fade-up"><span>THE RALLYUP PHILOSOPHY</span><span>01 — 03</span></div>
-        <div className="luxe-philosophy-grid">
-          <h2 id="philosophy-title" data-reveal="fade-up">A better match<br />begins before<br />the first serve.</h2>
-          <div className="luxe-philosophy-copy" data-reveal="fade-up">
-            <p>RallyUp brings the parts of tennis together: finding the right people, choosing where to play, and keeping the progress you make along the way.</p>
-            <a className="luxe-text-link" href="#screens">Meet the app <ArrowRight aria-hidden="true" /></a>
-          </div>
-        </div>
-        <div className="luxe-feature-list" id="people">
-          {featureRows.map(({ number, kicker, title, body, icon: Icon }, index) => (
-            <article className="luxe-feature-row" key={number} data-reveal="fade-up" style={{ "--reveal-delay": `${index * 80}ms` } as CSSProperties}>
-              <span className="luxe-feature-number">{number}</span>
-              <Icon aria-hidden="true" />
-              <p className="luxe-feature-label">{kicker}</p>
-              <div><h3>{title}</h3><p>{body}</p></div>
-              <ArrowRight className="luxe-feature-arrow" aria-hidden="true" />
-            </article>
-          ))}
-        </div>
+      <section className="bevel-pillars" id="product" aria-labelledby="pillars-title">
+        <div className="bevel-section-heading" data-reveal="fade-up"><p className="bevel-eyebrow"><span /> ONE APP. EVERY PART OF THE GAME.</p><h2 id="pillars-title">Your game,<br /><em>all in one place.</em></h2><p>From the first invite to the final point, RallyUp gives you a simpler way to make tennis part of your life.</p></div>
+        <div className="bevel-pillar-grid">{pillars.map(({ eyebrow, title, body, icon: Icon, tone }, index) => <article className={`bevel-pillar bevel-pillar-${tone}`} key={eyebrow} data-reveal="fade-up" style={{ "--reveal-delay": `${index * 90}ms` } as CSSProperties}><div className="bevel-pillar-top"><span>{eyebrow}</span><Icon aria-hidden="true" /></div><div><h3>{title}</h3><p>{body}</p></div><a href="#how-it-works" aria-label={`Learn more about ${title}`}><ArrowUpRight aria-hidden="true" /></a></article>)}</div>
       </section>
 
-      <section className="luxe-tour" id="screens" aria-labelledby="tour-title">
-        <div className="luxe-tour-head" data-reveal="fade-up">
-          <div><p className="luxe-overline"><span /> INSIDE RALLYUP</p><h2 id="tour-title">Every part<br />in its place.</h2></div>
-          <p>Considered for the moments around the match, and the ones that happen on court.</p>
-        </div>
-        <ScreenTour />
-        <div className="luxe-tour-foot"><span>SELECT A CHAPTER</span><span>02 — 04</span></div>
+      <section className="bevel-feature" id="how-it-works" aria-labelledby="feature-title">
+        <div className="bevel-feature-intro" data-reveal="fade-up"><p className="bevel-eyebrow bevel-eyebrow-light"><span /> MADE FOR THE WAY YOU PLAY</p><h2 id="feature-title">Good tennis<br /><em>starts here.</em></h2><p>RallyUp makes the invisible work of playing easier, so you can spend more time on the court.</p></div>
+        <ScreenTour /><div className="bevel-feature-footer"><span>EXPLORE THE APP</span><span>SELECT A FEATURE <ArrowRight aria-hidden="true" /></span></div>
       </section>
 
-      <section className="luxe-progress" id="progress" aria-labelledby="progress-title">
-        <div className="luxe-progress-image parallax-layer" data-parallax="0.04">
-          <Image src="/images/tennis/serve-grass-court.webp" alt="A tennis player preparing a grass-court serve" fill sizes="(max-width: 680px) 100vw, 50vw" />
-          <span>THE LONG GAME · FIG. 02</span>
-        </div>
-        <div className="luxe-progress-copy" data-reveal="fade-up">
-          <p className="luxe-overline"><span /> A GAME THAT ADDS UP</p>
-          <h2 id="progress-title">Keep the<br />whole story.</h2>
-          <p>Every match leaves something behind. RallyUp keeps your scores, your story, and the progress taking shape between games.</p>
-          <a className="luxe-text-link" href="#screens">See your game in view <ArrowRight aria-hidden="true" /></a>
-          <div className="luxe-progress-rule"><span>PLAY WELL</span><i /><span>COME BACK BETTER</span></div>
-        </div>
+      <section className="bevel-progress" id="progress" aria-labelledby="progress-title">
+        <div className="bevel-progress-art" data-reveal="fade-up"><Image src="/images/tennis/serve-grass-court.webp" alt="Tennis player serving on a grass court" fill sizes="(max-width: 760px) 100vw, 42vw" /><div className="bevel-progress-card"><span>THIS SEASON</span><strong>+24%</strong><small>more matches played</small><div><i /><i /><i /><i /><i /><i /><i /></div></div></div>
+        <div className="bevel-progress-copy" data-reveal="fade-up"><p className="bevel-eyebrow"><span /> THE LONG GAME</p><h2 id="progress-title">Every match<br /><em>adds up.</em></h2><p>Keep your scores, see your patterns, and turn the matches you play into momentum for the next one.</p><div className="bevel-progress-list"><span><b>01</b> Match history <ArrowRight aria-hidden="true" /></span><span><b>02</b> Head-to-heads <ArrowRight aria-hidden="true" /></span><span><b>03</b> Performance <ArrowRight aria-hidden="true" /></span></div></div>
       </section>
 
-      <section className="luxe-close" aria-labelledby="close-title" data-reveal="fade-up">
-        <p className="luxe-overline"><span /> YOUR NEXT MATCH AWAITS</p>
-        <h2 id="close-title">Make time<br />for tennis.</h2>
-        <ComingSoonButton className="luxe-primary luxe-close-cta" />
-        <span className="luxe-close-mark" aria-hidden="true">R</span>
-      </section>
+      <section className="bevel-cta" aria-labelledby="cta-title"><div className="bevel-cta-orbit" aria-hidden="true" /><div data-reveal="fade-up"><p className="bevel-eyebrow"><span /> YOUR NEXT MATCH IS OUT THERE</p><h2 id="cta-title">Ready to<br /><em>rally?</em></h2></div><ComingSoonButton className="bevel-button bevel-button-dark">Get started free</ComingSoonButton></section>
 
-      <footer className="luxe-footer">
-        <div className="luxe-footer-top">
-          <Image src="/assets/branding/rallyup-logo.svg" alt="RallyUp" width={145} height={63} />
-          <p>Find your people. Play more tennis.</p>
-          <div><Link href="/privacy">Privacy</Link><Link href="/terms">Terms</Link><a href="#top">Back to top <ArrowRight aria-hidden="true" /></a></div>
-        </div>
-        <span className="luxe-footer-note">PLAY · PEOPLE · PROGRESS</span>
-      </footer>
+      <footer className="bevel-footer"><div className="bevel-footer-top"><Image src="/assets/branding/rallyup-logo-dark.svg" alt="RallyUp" width={112} height={49} /><p>Find your people. Play your best game.</p><div><Link href="/privacy">Privacy</Link><Link href="/terms">Terms</Link><a href="#top">Back to top <ArrowUpRight aria-hidden="true" /></a></div></div><div className="bevel-footer-bottom"><span>© 2026 RallyUp</span><span>PLAY · PEOPLE · PROGRESS</span></div></footer>
     </main>
   );
 }
