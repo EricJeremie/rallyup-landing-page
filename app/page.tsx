@@ -8,15 +8,15 @@ import { MotionLayer } from "@/components/motion-layer";
 import { ScreenTour } from "@/components/screen-tour";
 
 const communityCards = [
-  { src: "/images/tennis/forehand-hard-court.webp", alt: "Tennis player preparing a forehand", className: "wide" },
+  { src: "/images/generated/rallyup-player-forehand.png", alt: "Tennis player finishing a forehand on a hard court", className: "wide generated-wide" },
   { src: "/images/screens/home.png", alt: "RallyUp home screen", className: "phone" },
-  { src: "/images/tennis/backhand-clay-court.png", alt: "Tennis player hitting a backhand", className: "tall" },
+  { src: "/images/generated/rallyup-doubles-net.png", alt: "Two tennis players meeting at the net", className: "tall generated-tall" },
   { src: "/images/screens/live-scoring.png", alt: "RallyUp live scoring screen", className: "phone" },
-  { src: "/images/tennis/serve-grass-court.webp", alt: "Tennis player serving on grass", className: "wide" },
+  { src: "/images/generated/rallyup-indoor-focus.png", alt: "Tennis player pausing on an indoor court", className: "wide generated-wide" },
   { src: "/images/screens/performance.png", alt: "RallyUp performance screen", className: "phone" },
-  { src: "/images/tennis/serve-indoor-court.png", alt: "Tennis player serving indoors", className: "tall" },
+  { src: "/images/tennis/serve-grass-court.webp", alt: "Tennis player serving on grass", className: "tall generated-tall" },
   { src: "/images/screens/find-players.png", alt: "RallyUp player discovery screen", className: "phone" },
-  { src: "/images/tennis/overhead-smash-hard-court.png", alt: "Tennis player going for an overhead smash", className: "wide" },
+  { src: "/images/tennis/overhead-smash-hard-court.png", alt: "Tennis player going for an overhead smash", className: "wide generated-wide" },
 ];
 
 const extras = [
@@ -61,7 +61,6 @@ export default function LandingPage() {
 
       <section className="bevel2-hero" aria-labelledby="hero-title">
         <div className="bevel2-hero-surface">
-          <div className="bevel2-aurora bevel2-aurora-one" aria-hidden="true" /><div className="bevel2-aurora bevel2-aurora-two" aria-hidden="true" />
           <div className="bevel2-hero-copy" data-reveal="fade-up">
             <p className="bevel2-overline">THE CONNECTED TENNIS APP</p>
             <h1 id="hero-title">Your tennis,<br /><em>in motion.</em></h1>
@@ -69,13 +68,13 @@ export default function LandingPage() {
             <ComingSoonButton className="bevel2-dark-button">Get started free</ComingSoonButton>
             <div className="bevel2-rating"><span>★★★★★</span><small>4.9 / 12K players already rallying</small></div>
           </div>
-          <div className="bevel2-hero-art" data-reveal="fade-up"><div className="bevel2-hero-court"><Image src="/images/tennis/forehand-hard-court.webp" alt="Tennis player on a hard court" fill priority sizes="(max-width: 760px) 100vw, 56vw" /></div><Phone src="/images/screens/home.png" alt="RallyUp home screen with upcoming match" className="bevel2-hero-phone" priority /><div className="bevel2-hero-float"><MiniScore value="15—9" label="YOUR RECORD" /><MiniScore value="63%" label="WIN RATE" tone="soft" /></div></div>
+          <div className="bevel2-hero-art" data-reveal="fade-up"><div className="bevel2-hero-court"><Image src="/images/generated/rallyup-player-forehand.png" alt="Tennis player finishing a forehand on a hard court" fill priority sizes="(max-width: 760px) 100vw, 56vw" /></div><Phone src="/images/screens/home.png" alt="RallyUp home screen with upcoming match" className="bevel2-hero-phone" priority /><div className="bevel2-hero-float"><MiniScore value="15—9" label="YOUR RECORD" /><MiniScore value="63%" label="WIN RATE" tone="soft" /></div></div>
         </div>
       </section>
 
       <section className="bevel2-download" id="product" aria-label="Get RallyUp">
-        <div className="bevel2-download-copy"><p className="bevel2-overline">ONE PLACE TO PLAY MORE</p><h2>Start with the next match.</h2><p>Get started with RallyUp for free today. Bring your people, your places, and your game with you.</p></div>
-        <div className="bevel2-download-card"><Phone src="/images/screens/home.png" alt="RallyUp mobile app home screen" className="bevel2-download-phone" /><div><span className="bevel2-qr" aria-hidden="true">▦</span><strong>Get RallyUp</strong><small>Scan to explore the app</small></div><ArrowUpRight aria-hidden="true" /></div>
+        <div className="bevel2-download-copy"><p className="bevel2-overline">ONE PLACE TO PLAY MORE</p><h2>Everything around the match.</h2><p>RallyUp brings your players, courts, scores, and progress into one simple rhythm.</p><div className="bevel2-download-points"><span><i /> Find your next player</span><span><i /> Keep every point in motion</span><span><i /> See your game add up</span></div></div>
+        <div className="bevel2-download-card"><Phone src="/images/screens/home.png" alt="RallyUp mobile app home screen" className="bevel2-download-phone" /><div><span className="bevel2-download-mark" aria-hidden="true">↗</span><strong>See RallyUp in action</strong><small>Explore the app before your next match</small><ComingSoonButton className="bevel2-download-button">Explore the app</ComingSoonButton></div></div>
       </section>
 
       <section className="bevel2-works" aria-labelledby="works-title"><h2 id="works-title">Works with</h2><div className="bevel2-marquee"><div><span>HARD COURT</span><i /> <span>CLAY</span><i /> <span>GRASS</span><i /> <span>INDOOR</span><i /> <span>DOUBLES</span><i /> <span>HARD COURT</span><i /> <span>CLAY</span><i /> <span>GRASS</span><i /> <span>INDOOR</span><i /></div></div><div className="bevel2-award"><Sparkles aria-hidden="true" /><span>Made for every kind of player, from first serve to club regular.</span></div></section>
