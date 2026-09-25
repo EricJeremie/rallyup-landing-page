@@ -30,9 +30,9 @@ export default function LandingPage() {
       <MotionLayer />
 
       <header className="bevel-header">
-        <Link href="/" className="bevel-logo" aria-label="RallyUp home"><Image src="/assets/branding/rallyup-logo-dark.svg" alt="RallyUp" width={112} height={49} priority /></Link>
+        <Link href="/" prefetch={false} className="bevel-logo" aria-label="RallyUp home"><Image src="/assets/branding/rallyup-logo-dark.svg" alt="RallyUp" width={112} height={49} priority /></Link>
         <nav className="bevel-nav" aria-label="Main navigation"><a href="#product">Product</a><a href="#how-it-works">How it works</a><a href="#progress">Progress</a></nav>
-        <div className="bevel-header-actions"><Link href="/app" className="bevel-login">Log in</Link><ComingSoonButton className="bevel-button bevel-button-small">Get started</ComingSoonButton></div>
+        <div className="bevel-header-actions"><Link href="/app" prefetch={false} className="bevel-login">Log in</Link><ComingSoonButton className="bevel-button bevel-button-small">Get started</ComingSoonButton></div>
       </header>
 
       <section className="bevel-hero" aria-labelledby="hero-title">
@@ -70,7 +70,7 @@ export default function LandingPage() {
 
       <section className="bevel-cta" aria-labelledby="cta-title"><div className="bevel-cta-orbit" aria-hidden="true" /><div data-reveal="fade-up"><p className="bevel-eyebrow"><span /> YOUR NEXT MATCH IS OUT THERE</p><h2 id="cta-title">Ready to<br /><em>rally?</em></h2></div><ComingSoonButton className="bevel-button bevel-button-dark">Get started free</ComingSoonButton></section>
 
-      <footer className="bevel-footer"><div className="bevel-footer-top"><Image src="/assets/branding/rallyup-logo-dark.svg" alt="RallyUp" width={112} height={49} /><p>Find your people. Play your best game.</p><div><Link href="/privacy">Privacy</Link><Link href="/terms">Terms</Link><a href="#top">Back to top <ArrowUpRight aria-hidden="true" /></a></div></div><div className="bevel-footer-bottom"><span>© 2026 RallyUp</span><span>PLAY · PEOPLE · PROGRESS</span></div></footer>
+      <footer className="bevel-footer"><div className="bevel-footer-top"><Image src="/assets/branding/rallyup-logo-dark.svg" alt="RallyUp" width={112} height={49} /><p>Find your people. Play your best game.</p><div><Link href="/privacy" prefetch={false}>Privacy</Link><Link href="/terms" prefetch={false}>Terms</Link><a href="#top">Back to top <ArrowUpRight aria-hidden="true" /></a></div></div><div className="bevel-footer-bottom"><span>© 2026 RallyUp</span><span>PLAY · PEOPLE · PROGRESS</span></div></footer>
     </main>
   );
 }

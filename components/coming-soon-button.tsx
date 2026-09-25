@@ -12,6 +12,7 @@ export function ComingSoonButton({
   return (
     <Link
       href="/app"
+      prefetch={false}
       className={`coming-soon-button ${className}`}
     >
       {children}
