@@ -8,13 +8,13 @@ import { MotionLayer } from "@/components/motion-layer";
 import { ScreenTour } from "@/components/screen-tour";
 
 const communityCards = [
+  { src: "/images/generated/rallyup-doubles-net.png", alt: "Two tennis players meeting at the net", className: "tall generated-tall" },
+  { src: "/images/screens/performance.png", alt: "RallyUp performance screen", className: "phone" },
   { src: "/images/generated/rallyup-player-forehand.png", alt: "Tennis player finishing a forehand on a hard court", className: "wide generated-wide" },
   { src: "/images/screens/home.png", alt: "RallyUp home screen", className: "phone" },
-  { src: "/images/generated/rallyup-doubles-net.png", alt: "Two tennis players meeting at the net", className: "tall generated-tall" },
+  { src: "/images/generated/rallyup-indoor-focus.png", alt: "Tennis player pausing on an indoor court", className: "tall generated-tall" },
   { src: "/images/screens/live-scoring.png", alt: "RallyUp live scoring screen", className: "phone" },
-  { src: "/images/generated/rallyup-indoor-focus.png", alt: "Tennis player pausing on an indoor court", className: "wide generated-wide" },
-  { src: "/images/screens/performance.png", alt: "RallyUp performance screen", className: "phone" },
-  { src: "/images/tennis/serve-grass-court.webp", alt: "Tennis player serving on grass", className: "tall generated-tall" },
+  { src: "/images/tennis/serve-grass-court.webp", alt: "Tennis player serving on grass", className: "wide generated-wide" },
   { src: "/images/screens/find-players.png", alt: "RallyUp player discovery screen", className: "phone" },
   { src: "/images/tennis/overhead-smash-hard-court.png", alt: "Tennis player going for an overhead smash", className: "wide generated-wide" },
 ];
@@ -37,6 +37,8 @@ const reviews = [
   ["Every match feels connected", "The history and head-to-head view make even a weeknight hit feel like progress.", "Sam P."],
   ["Good people. Better tennis.", "RallyUp helped me find a regular group and actually stick with the game.", "Chris L."],
 ];
+
+const collageColumns = [[0, 2], [1, 4], [3, 5, 8], [6, 7]];
 
 function Phone({ src, alt, className = "", priority = false }: { src: string; alt: string; className?: string; priority?: boolean }) {
   return <div className={`bevel2-phone ${className}`}><div className="bevel2-phone-screen"><Image src={src} alt={alt} fill priority={priority} sizes="(max-width: 760px) 58vw, 300px" className="bevel2-phone-image" /><span className="bevel2-phone-island" aria-hidden="true" /></div></div>;
@@ -79,7 +81,7 @@ export default function LandingPage() {
 
       <section className="bevel2-works" aria-labelledby="works-title"><h2 id="works-title">Works with</h2><div className="bevel2-marquee"><div><span>HARD COURT</span><i /> <span>CLAY</span><i /> <span>GRASS</span><i /> <span>INDOOR</span><i /> <span>DOUBLES</span><i /> <span>HARD COURT</span><i /> <span>CLAY</span><i /> <span>GRASS</span><i /> <span>INDOOR</span><i /></div></div><div className="bevel2-award"><Sparkles aria-hidden="true" /><span>Made for every kind of player, from first serve to club regular.</span></div></section>
 
-      <section className="bevel2-community" id="stories" aria-labelledby="community-title"><div className="bevel2-centered-heading" data-reveal="fade-up"><p className="bevel2-overline">THE RALLYUP COMMUNITY</p><h2 id="community-title">Join the next generation<br /><em>of tennis players.</em></h2></div><div className="bevel2-collage">{communityCards.map(({ src, alt, className }, index) => <div className={`bevel2-collage-card ${className}`} key={`${src}-${index}`}><Image src={src} alt={alt} fill sizes="(max-width: 760px) 34vw, 18vw" /></div>)}<div className="bevel2-collage-note"><strong>Good people.<br />Great game.</strong><span>Find your match and keep the momentum.</span></div></div></section>
+      <section className="bevel2-community" id="stories" aria-labelledby="community-title"><div className="bevel2-centered-heading" data-reveal="fade-up"><p className="bevel2-overline">THE RALLYUP COMMUNITY</p><h2 id="community-title">Join the next generation<br /><em>of tennis players.</em></h2></div><div className="bevel2-collage">{collageColumns.map((column, columnIndex) => <div className="bevel2-collage-column" key={`collage-column-${columnIndex}`}>{column.map((cardIndex) => { const { src, alt, className } = communityCards[cardIndex]; return <div className={`bevel2-collage-card ${className}`} key={`${src}-${cardIndex}`}><Image src={src} alt={alt} fill sizes="(max-width: 760px) 42vw, 20vw" /></div>; })}{columnIndex === 1 && <div className="bevel2-collage-note"><strong>Good people.<br />Great game.</strong><span>Find your match and keep the momentum.</span></div>}</div>)}</div></section>
 
       <section className="bevel2-chapters" aria-labelledby="chapters-title"><div className="bevel2-chapters-heading"><p className="bevel2-overline">EVERYTHING IN ITS PLACE</p><h2 id="chapters-title">Start every match<br /><em>with confidence.</em></h2><p>Turn the moments around tennis into clear, actionable next steps.</p></div><ScreenTour /></section>
 
