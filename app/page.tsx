@@ -9,13 +9,13 @@ import { ScreenTour } from "@/components/screen-tour";
 
 const communityCards = [
   { src: "/images/generated/rallyup-doubles-net.png", alt: "Two tennis players meeting at the net", className: "tall generated-tall" },
-  { src: "/images/screens/performance.png", alt: "RallyUp performance screen", className: "phone" },
+  { src: "/images/mockups/performance.png", alt: "RallyUp performance screen", className: "phone" },
   { src: "/images/generated/rallyup-player-forehand.png", alt: "Tennis player finishing a forehand on a hard court", className: "wide generated-wide" },
-  { src: "/images/screens/home.png", alt: "RallyUp home screen", className: "phone" },
+  { src: "/images/mockups/home.png", alt: "RallyUp home screen", className: "phone" },
   { src: "/images/generated/rallyup-indoor-focus.png", alt: "Tennis player pausing on an indoor court", className: "tall generated-tall" },
-  { src: "/images/screens/live-scoring.png", alt: "RallyUp live scoring screen", className: "phone" },
+  { src: "/images/mockups/live-scorekeeper.png", alt: "RallyUp live scoring screen", className: "phone" },
   { src: "/images/tennis/serve-grass-court.webp", alt: "Tennis player serving on grass", className: "wide generated-wide" },
-  { src: "/images/screens/find-players.png", alt: "RallyUp player discovery screen", className: "phone" },
+  { src: "/images/mockups/find-players.png", alt: "RallyUp player discovery screen", className: "phone" },
   { src: "/images/tennis/overhead-smash-hard-court.png", alt: "Tennis player going for an overhead smash", className: "wide generated-wide" },
 ];
 
@@ -41,7 +41,7 @@ const reviews = [
 const collageColumns = [[0, 2, 4], [1, 5], [3], [6, 7, 8]];
 
 function Phone({ src, alt, className = "", priority = false }: { src: string; alt: string; className?: string; priority?: boolean }) {
-  return <div className={`bevel2-phone ${className}`}><div className="bevel2-phone-screen"><Image src={src} alt={alt} fill priority={priority} sizes="(max-width: 760px) 58vw, 300px" className="bevel2-phone-image" /><span className="bevel2-phone-island" aria-hidden="true" /></div></div>;
+  return <div className={`bevel2-supplied-mockup ${className}`}><Image src={src} alt={alt} width={410} height={887} priority={priority} sizes="(max-width: 760px) 58vw, 300px" /></div>;
 }
 
 function MiniScore({ value, label, tone = "lime" }: { value: string; label: string; tone?: string }) {
@@ -70,13 +70,13 @@ export default function LandingPage() {
             <ComingSoonButton className="bevel2-dark-button">Get started free</ComingSoonButton>
             <div className="bevel2-rating"><span>★★★★★</span><small>4.9 / 12K players already rallying</small></div>
           </div>
-          <div className="bevel2-hero-art" data-reveal="fade-up"><div className="bevel2-hero-court"><Image src="/images/generated/rallyup-player-forehand.png" alt="Tennis player finishing a forehand on a hard court" fill priority sizes="(max-width: 760px) 100vw, 56vw" /></div><Phone src="/images/screens/home.png" alt="RallyUp home screen with upcoming match" className="bevel2-hero-phone" priority /><div className="bevel2-hero-float"><MiniScore value="15—9" label="YOUR RECORD" /><MiniScore value="63%" label="WIN RATE" tone="soft" /></div></div>
+          <div className="bevel2-hero-art" data-reveal="fade-up"><div className="bevel2-hero-court"><Image src="/images/generated/rallyup-player-forehand.png" alt="Tennis player finishing a forehand on a hard court" fill priority sizes="(max-width: 760px) 100vw, 56vw" /></div><Phone src="/images/mockups/home.png" alt="RallyUp home screen with upcoming match" className="bevel2-hero-phone" priority /><div className="bevel2-hero-float"><MiniScore value="15—9" label="YOUR RECORD" /><MiniScore value="63%" label="WIN RATE" tone="soft" /></div></div>
         </div>
       </section>
 
       <section className="bevel2-download" id="product" aria-label="Get RallyUp">
         <div className="bevel2-download-copy"><p className="bevel2-overline">ONE PLACE TO PLAY MORE</p><h2>Everything around the match.</h2><p>RallyUp brings your players, courts, scores, and progress into one simple rhythm.</p><div className="bevel2-download-points"><span><i /> Find your next player</span><span><i /> Keep every point in motion</span><span><i /> See your game add up</span></div></div>
-        <div className="bevel2-download-card"><Phone src="/images/screens/home.png" alt="RallyUp mobile app home screen" className="bevel2-download-phone" /><div><span className="bevel2-download-mark" aria-hidden="true">↗</span><strong>See RallyUp in action</strong><small>Explore the app before your next match</small><ComingSoonButton className="bevel2-download-button">Explore the app</ComingSoonButton></div></div>
+        <div className="bevel2-download-card"><Phone src="/images/mockups/home.png" alt="RallyUp mobile app home screen" className="bevel2-download-phone" /><div><span className="bevel2-download-mark" aria-hidden="true">↗</span><strong>See RallyUp in action</strong><small>Explore the app before your next match</small><ComingSoonButton className="bevel2-download-button">Explore the app</ComingSoonButton></div></div>
       </section>
 
       <section className="bevel2-works" aria-labelledby="works-title"><h2 id="works-title">Works with</h2><div className="bevel2-marquee"><div><span>HARD COURT</span><i /> <span>CLAY</span><i /> <span>GRASS</span><i /> <span>INDOOR</span><i /> <span>DOUBLES</span><i /> <span>HARD COURT</span><i /> <span>CLAY</span><i /> <span>GRASS</span><i /> <span>INDOOR</span><i /></div></div><div className="bevel2-award"><Sparkles aria-hidden="true" /><span>Made for every kind of player, from first serve to club regular.</span></div></section>
@@ -85,7 +85,7 @@ export default function LandingPage() {
 
       <section className="bevel2-chapters" aria-labelledby="chapters-title"><div className="bevel2-chapters-heading"><p className="bevel2-overline">EVERYTHING IN ITS PLACE</p><h2 id="chapters-title">Start every match<br /><em>with confidence.</em></h2><p>Turn the moments around tennis into clear, actionable next steps.</p></div><ScreenTour /></section>
 
-      <section className="bevel2-intelligence" id="intelligence" aria-labelledby="intelligence-title"><div className="bevel2-intelligence-heading" data-reveal="fade-up"><p className="bevel2-overline">GO DEEPER WITH RALLYUP COACH</p><h2 id="intelligence-title">A better coach<br /><em>for your game.</em></h2><p>Personalized guidance and useful nudges for the player you are becoming.</p></div><div className="bevel2-intelligence-grid"><article><div className="bevel2-intelligence-copy"><span>01</span><h3>Get answers<br /><em>from your game.</em></h3><p>Ask what your record means, where you are improving, and what to work on next.</p></div><Phone src="/images/screens/performance.png" alt="RallyUp performance screen" className="bevel2-intelligence-phone" /></article><article><div className="bevel2-intelligence-copy"><span>02</span><h3>Proactive<br /><em>match check-ins.</em></h3><p>Get reminders, summaries, and small prompts without having to ask first.</p></div><div className="bevel2-checkin"><span><i /> TOMORROW, 7:00 PM</span><strong>Match with Jamie</strong><small>Grass court · Singles · 60 min</small><button type="button">Add to my matches <ArrowRight aria-hidden="true" /></button></div></article><article><div className="bevel2-intelligence-copy"><span>03</span><h3>Find patterns<br /><em>you can trust.</em></h3><p>See which surfaces, opponents, and rhythms bring out your best tennis.</p></div><div className="bevel2-pattern-chart"><div><span>CLAY</span><b style={{ "--bar": "82%" } as CSSProperties} /><strong>82%</strong></div><div><span>HARD</span><b style={{ "--bar": "68%" } as CSSProperties} /><strong>68%</strong></div><div><span>GRASS</span><b style={{ "--bar": "91%" } as CSSProperties} /><strong>91%</strong></div></div></article></div></section>
+      <section className="bevel2-intelligence" id="intelligence" aria-labelledby="intelligence-title"><div className="bevel2-intelligence-heading" data-reveal="fade-up"><p className="bevel2-overline">GO DEEPER WITH RALLYUP COACH</p><h2 id="intelligence-title">A better coach<br /><em>for your game.</em></h2><p>Personalized guidance and useful nudges for the player you are becoming.</p></div><div className="bevel2-intelligence-grid"><article><div className="bevel2-intelligence-copy"><span>01</span><h3>Get answers<br /><em>from your game.</em></h3><p>Ask what your record means, where you are improving, and what to work on next.</p></div><Phone src="/images/mockups/performance.png" alt="RallyUp performance screen" className="bevel2-intelligence-phone" /></article><article><div className="bevel2-intelligence-copy"><span>02</span><h3>Proactive<br /><em>match check-ins.</em></h3><p>Get reminders, summaries, and small prompts without having to ask first.</p></div><div className="bevel2-checkin"><span><i /> TOMORROW, 7:00 PM</span><strong>Match with Jamie</strong><small>Grass court · Singles · 60 min</small><button type="button">Add to my matches <ArrowRight aria-hidden="true" /></button></div></article><article><div className="bevel2-intelligence-copy"><span>03</span><h3>Find patterns<br /><em>you can trust.</em></h3><p>See which surfaces, opponents, and rhythms bring out your best tennis.</p></div><div className="bevel2-pattern-chart"><div><span>CLAY</span><b style={{ "--bar": "82%" } as CSSProperties} /><strong>82%</strong></div><div><span>HARD</span><b style={{ "--bar": "68%" } as CSSProperties} /><strong>68%</strong></div><div><span>GRASS</span><b style={{ "--bar": "91%" } as CSSProperties} /><strong>91%</strong></div></div></article></div></section>
 
       <section className="bevel2-extras" aria-labelledby="extras-title"><div className="bevel2-extras-heading"><p className="bevel2-overline">AND THAT&apos;S NOT ALL</p><h2 id="extras-title">More ways to<br /><em>stay in the game.</em></h2><p>The little details that make the habit of playing feel effortless.</p></div><div className="bevel2-extras-grid">{extras.map(([title, body], index) => <article key={title}><span>0{index + 1}</span><div><h3>{title}</h3><p>{body}</p></div><ArrowUpRight aria-hidden="true" /></article>)}</div></section>
 

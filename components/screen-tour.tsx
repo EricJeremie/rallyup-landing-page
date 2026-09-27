@@ -11,7 +11,7 @@ const screens = [
     eyebrow: "01 / PEOPLE",
     title: "Find someone who plays your game.",
     body: "Browse nearby players by level, availability, and match fit.",
-    src: "/images/screens/find-players.png",
+    src: "/images/mockups/find-players.png",
     alt: "RallyUp Find Players screen",
     icon: Search,
   },
@@ -21,7 +21,7 @@ const screens = [
     eyebrow: "02 / PLAY",
     title: "Keep the match moving.",
     body: "Track every point with a live score built for the court.",
-    src: "/images/screens/live-scoring.png",
+    src: "/images/mockups/live-scorekeeper.png",
     alt: "RallyUp live match scoring screen",
     icon: Swords,
   },
@@ -31,7 +31,7 @@ const screens = [
     eyebrow: "03 / PLAY",
     title: "Know where the next rally starts.",
     body: "See nearby courts and the details you need before you head out.",
-    src: "/images/screens/court-locator.png",
+    src: "/images/mockups/courts.png",
     alt: "RallyUp court locator screen",
     icon: MapPin,
   },
@@ -41,7 +41,7 @@ const screens = [
     eyebrow: "04 / PROGRESS",
     title: "Every match adds up.",
     body: "Keep your record, rivalries, and progress in one place.",
-    src: "/images/screens/performance.png",
+    src: "/images/mockups/performance.png",
     alt: "RallyUp performance screen",
     icon: Trophy,
   },
@@ -107,11 +107,8 @@ export function ScreenTour() {
           <span className="screen-tour-hint">Tap a feature to explore <ArrowRight aria-hidden="true" /></span>
         </div>
         <div className="screen-tour-phone" key={`${active.id}-phone`}>
-          <div className="iphone-mockup screen-tour-device" data-tilt>
-            <div className="iphone-screen">
-              <Image src={active.src} alt={active.alt} fill sizes="(max-width: 680px) 58vw, 330px" className="iphone-screen-image" />
-              <span className="iphone-island" aria-hidden="true" />
-            </div>
+          <div className="bevel2-supplied-mockup screen-tour-device" data-tilt>
+            <Image src={active.src} alt={active.alt} width={410} height={887} sizes="(max-width: 680px) 58vw, 330px" className="screen-tour-image" />
           </div>
           <span className="screen-tour-shadow" aria-hidden="true" />
         </div>
