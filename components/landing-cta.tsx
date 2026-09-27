@@ -1,8 +1,7 @@
-import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import type { ReactNode } from "react";
 
-export function ComingSoonButton({
+export function LandingCta({
   className,
   children = "Explore RallyUp",
 }: {
@@ -10,13 +9,9 @@ export function ComingSoonButton({
   children?: ReactNode;
 }) {
   return (
-    <Link
-      href="/app"
-      prefetch={false}
-      className={`coming-soon-button ${className}`}
-    >
+    <a href="#product" className={`landing-cta ${className}`}>
       {children}
       <ArrowRight aria-hidden="true" />
-    </Link>
+    </a>
   );
 }

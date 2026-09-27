@@ -3,7 +3,7 @@ import Link from "next/link";
 import type { CSSProperties } from "react";
 import { ArrowRight, ArrowUpRight, ShieldCheck } from "lucide-react";
 
-import { ComingSoonButton } from "@/components/coming-soon-button";
+import { LandingCta } from "@/components/landing-cta";
 import { MockupCarousel } from "@/components/mockup-carousel";
 import { MotionLayer } from "@/components/motion-layer";
 import { ScreenTour } from "@/components/screen-tour";
@@ -44,7 +44,7 @@ export default function LandingPage() {
         <div className="bevel2-header-pill">
           <Link href="/" prefetch={false} className="bevel2-logo" aria-label="RallyUp home"><Image src="/assets/branding/rallyup-logo-dark.svg" alt="RallyUp" width={108} height={47} priority /></Link>
           <nav aria-label="Main navigation"><a href="#product">Product</a><a href="#stories">Stories</a><a href="#intelligence">RallyUp coach</a></nav>
-          <div className="bevel2-header-actions"><Link href="/app" prefetch={false} className="bevel2-login">Log in</Link><ComingSoonButton className="bevel2-pill-button">Get started</ComingSoonButton></div>
+          <div className="bevel2-header-actions"><LandingCta className="bevel2-pill-button">Get started</LandingCta></div>
         </div>
       </header>
 
@@ -54,7 +54,7 @@ export default function LandingPage() {
             <p className="bevel2-overline">THE CONNECTED TENNIS APP</p>
             <h1 id="hero-title">Your tennis,<br /><em>in motion.</em></h1>
             <p>Make sense of the whole game—from finding players and courts to keeping score and seeing your progress.</p>
-            <ComingSoonButton className="bevel2-dark-button">Get started free</ComingSoonButton>
+            <LandingCta className="bevel2-dark-button">Get started free</LandingCta>
             <div className="bevel2-rating"><span>★★★★★</span><small>4.9 / 12K players already rallying</small></div>
           </div>
           <div className="bevel2-hero-art" data-reveal="fade-up"><div className="bevel2-hero-court"><Image src="/images/generated/rallyup-player-forehand.png" alt="Tennis player finishing a forehand on a hard court" fill priority sizes="(max-width: 760px) 100vw, 56vw" /></div><Phone src="/images/mockups/home.png" alt="RallyUp home screen with upcoming match" className="bevel2-hero-phone" priority /><div className="bevel2-hero-float"><MiniScore value="15—9" label="YOUR RECORD" /><MiniScore value="63%" label="WIN RATE" tone="soft" /></div></div>
@@ -63,7 +63,7 @@ export default function LandingPage() {
 
       <section className="bevel2-download" id="product" aria-label="Get RallyUp">
         <div className="bevel2-download-copy"><p className="bevel2-overline">ONE PLACE TO PLAY MORE</p><h2>Everything around the match.</h2><p>RallyUp brings your players, courts, scores, and progress into one simple rhythm.</p><div className="bevel2-download-points"><span><i /> Find your next player</span><span><i /> Keep every point in motion</span><span><i /> See your game add up</span></div></div>
-        <div className="bevel2-download-card"><Phone src="/images/mockups/home.png" alt="RallyUp mobile app home screen" className="bevel2-download-phone" /><div><span className="bevel2-download-mark" aria-hidden="true">↗</span><strong>See RallyUp in action</strong><small>Explore the app before your next match</small><ComingSoonButton className="bevel2-download-button">Explore the app</ComingSoonButton></div></div>
+        <div className="bevel2-download-card"><Phone src="/images/mockups/home.png" alt="RallyUp mobile app home screen" className="bevel2-download-phone" /><div><span className="bevel2-download-mark" aria-hidden="true">↗</span><strong>See RallyUp in action</strong><small>Explore the app before your next match</small><LandingCta className="bevel2-download-button">Explore the app</LandingCta></div></div>
       </section>
 
       <section className="bevel2-community" id="stories" aria-labelledby="community-title"><div className="bevel2-centered-heading" data-reveal="fade-up"><p className="bevel2-overline">THE RALLYUP COMMUNITY</p><h2 id="community-title">Join the next generation<br /><em>of tennis players.</em></h2></div><MockupCarousel /></section>
@@ -78,9 +78,9 @@ export default function LandingPage() {
 
       <section className="bevel2-reviews" aria-labelledby="reviews-title"><div className="bevel2-centered-heading"><p className="bevel2-overline">CRAFTED WITH CARE. LOVED BY PLAYERS.</p><h2 id="reviews-title">Don’t take our word<br /><em>for it.</em></h2><p>See why players keep coming back for the next rally.</p></div><div className="bevel2-review-rail">{reviews.map(([title, body, name]) => <article key={title}><div className="bevel2-review-stars">★★★★★</div><h3>{title}</h3><p>“{body}”</p><span>{name} <i>RallyUp player</i></span></article>)}</div></section>
 
-      <section className="bevel2-final" aria-labelledby="final-title"><div className="bevel2-final-image"><Image src="/images/tennis/serve-grass-court.webp" alt="Tennis player reaching for a serve" fill sizes="100vw" /></div><div className="bevel2-final-copy"><p className="bevel2-overline">YOUR NEXT MATCH AWAITS</p><h2 id="final-title">Ready when<br /><em>you are.</em></h2><p>Start with one player, one court, one match. RallyUp meets you where you are and helps you keep going.</p><ComingSoonButton className="bevel2-dark-button">Get started free</ComingSoonButton></div></section>
+      <section className="bevel2-final" aria-labelledby="final-title"><div className="bevel2-final-image"><Image src="/images/tennis/serve-grass-court.webp" alt="Tennis player reaching for a serve" fill sizes="100vw" /></div><div className="bevel2-final-copy"><p className="bevel2-overline">YOUR NEXT MATCH AWAITS</p><h2 id="final-title">Ready when<br /><em>you are.</em></h2><p>Start with one player, one court, one match. RallyUp meets you where you are and helps you keep going.</p><LandingCta className="bevel2-dark-button">Get started free</LandingCta></div></section>
 
-      <footer className="bevel2-footer"><div className="bevel2-footer-brand"><Image src="/assets/branding/rallyup-logo-dark.svg" alt="RallyUp" width={112} height={49} /><span>Find your people. Play your best game.</span><div><Link href="/privacy" prefetch={false}>Privacy</Link><Link href="/terms" prefetch={false}>Terms</Link><a href="mailto:hello@rallyup.app">Contact us</a></div></div><div className="bevel2-footer-links"><div><strong>Company</strong><a href="#stories">About RallyUp</a><a href="#stories">Player stories</a><a href="#intelligence">Our approach</a></div><div><strong>Product</strong><a href="/app">Get started</a><a href="#product">How it works</a><a href="#intelligence">RallyUp Coach</a></div><div><strong>Explore</strong><a href="#top">Back to top</a><a href="/privacy">Privacy promise</a><a href="mailto:hello@rallyup.app">Report a bug</a></div></div><div className="bevel2-footer-bottom"><span>© 2026 RallyUp</span><span>PLAY · PEOPLE · PROGRESS</span></div></footer>
+      <footer className="bevel2-footer"><div className="bevel2-footer-brand"><Image src="/assets/branding/rallyup-logo-dark.svg" alt="RallyUp" width={112} height={49} /><span>Find your people. Play your best game.</span><div><Link href="/privacy" prefetch={false}>Privacy</Link><Link href="/terms" prefetch={false}>Terms</Link><a href="mailto:hello@rallyup.app">Contact us</a></div></div><div className="bevel2-footer-links"><div><strong>Company</strong><a href="#stories">About RallyUp</a><a href="#stories">Player stories</a><a href="#intelligence">Our approach</a></div><div><strong>Product</strong><a href="#product">Get started</a><a href="#product">How it works</a><a href="#intelligence">RallyUp Coach</a></div><div><strong>Explore</strong><a href="#top">Back to top</a><a href="/privacy">Privacy promise</a><a href="mailto:hello@rallyup.app">Report a bug</a></div></div><div className="bevel2-footer-bottom"><span>© 2026 RallyUp</span><span>PLAY · PEOPLE · PROGRESS</span></div></footer>
     </main>
   );
 }
