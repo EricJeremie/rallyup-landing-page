@@ -1566,3 +1566,5 @@ h2 { margin: 0; font-size: 1.05rem; letter-spacing: -.025em; }
 .bevel2-download-card { overflow: visible; padding: 0; border-radius: 0; background: transparent; }.bevel2-download-card::before { display: none; }.bevel2-download-phone { margin: 0 28px 0 -10px; transform: none; }.bevel2-download-mark { background: var(--bevel2-lime); }.bevel2-download-card > div { padding: 18px 0; }
 @media (max-width: 900px) { .bevel2-download-card { padding: 0; } }
 @media (max-width: 680px) { .bevel2-download-phone { margin: 0 18px 0 -8px; } }
+/* Use the alpha channel of the transparent mockups; avoid rectangular shadows. */
+.mockup-carousel-item img { border-radius: 0; box-shadow: none; filter: drop-shadow(0 18px 24px rgba(15,43,31,.12)); }
