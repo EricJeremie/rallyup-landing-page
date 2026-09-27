@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { CSSProperties } from "react";
-import { ArrowRight, ArrowUpRight, ShieldCheck, Sparkles } from "lucide-react";
+import { ArrowRight, ArrowUpRight, ShieldCheck } from "lucide-react";
 
 import { ComingSoonButton } from "@/components/coming-soon-button";
 import { MockupCarousel } from "@/components/mockup-carousel";
@@ -65,8 +65,6 @@ export default function LandingPage() {
         <div className="bevel2-download-copy"><p className="bevel2-overline">ONE PLACE TO PLAY MORE</p><h2>Everything around the match.</h2><p>RallyUp brings your players, courts, scores, and progress into one simple rhythm.</p><div className="bevel2-download-points"><span><i /> Find your next player</span><span><i /> Keep every point in motion</span><span><i /> See your game add up</span></div></div>
         <div className="bevel2-download-card"><Phone src="/images/mockups/home.png" alt="RallyUp mobile app home screen" className="bevel2-download-phone" /><div><span className="bevel2-download-mark" aria-hidden="true">↗</span><strong>See RallyUp in action</strong><small>Explore the app before your next match</small><ComingSoonButton className="bevel2-download-button">Explore the app</ComingSoonButton></div></div>
       </section>
-
-      <section className="bevel2-works" aria-labelledby="works-title"><p className="bevel2-overline">THE WHOLE GAME, CONNECTED</p><h2 id="works-title">Made for the way<br /><em>you play.</em></h2><div className="bevel2-marquee"><div><span>HARD COURT</span><i /> <span>CLAY</span><i /> <span>GRASS</span><i /> <span>INDOOR</span><i /> <span>SINGLES</span><i /> <span>DOUBLES</span><i /> <span>TOURNAMENTS</span><i /> <span>HARD COURT</span><i /> <span>CLAY</span><i /> <span>GRASS</span><i /></div></div><div className="bevel2-award"><Sparkles aria-hidden="true" /><span>Every surface. Every level. Every rally.</span></div></section>
 
       <section className="bevel2-community" id="stories" aria-labelledby="community-title"><div className="bevel2-centered-heading" data-reveal="fade-up"><p className="bevel2-overline">THE RALLYUP COMMUNITY</p><h2 id="community-title">Join the next generation<br /><em>of tennis players.</em></h2></div><MockupCarousel /></section>
 
