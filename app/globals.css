@@ -1553,6 +1553,37 @@ h2 { margin: 0; font-size: 1.05rem; letter-spacing: -.025em; }
 @media (max-width: 900px) { .bevel2-download-card { min-height: 380px; }.bevel2-download-phone { width: 205px; margin-left: -30px; margin-right: 16px; } }
 @media (max-width: 680px) { .bevel2-download-card { min-height: 340px; }.bevel2-download-phone { width: 155px; margin-left: -25px; margin-right: 10px; }.bevel2-download-button { min-height: 44px; padding: 0 16px; } }
 .mockup-carousel-track { scrollbar-width: none; }.mockup-carousel-track::-webkit-scrollbar { display: none; }
+
+/* Density pass: keep the landing page flowing after the surface ticker was removed. */
+.bevel2-download { padding-top: clamp(56px, 6vw, 92px); padding-bottom: clamp(56px, 6vw, 92px); }
+.bevel2-community { padding-top: clamp(56px, 6vw, 88px); padding-bottom: clamp(84px, 9vw, 118px); }
+.bevel2-centered-heading { margin-bottom: 40px; }
+.bevel2-chapters { padding-top: clamp(72px, 9vw, 120px); padding-bottom: clamp(72px, 9vw, 120px); }
+.bevel2-chapters-heading { margin-bottom: 42px; }
+.bevel2-intelligence { padding-top: clamp(78px, 10vw, 124px); padding-bottom: clamp(78px, 10vw, 124px); }
+.bevel2-intelligence-heading { margin-bottom: 42px; }
+.bevel2-extras { padding-top: clamp(82px, 11vw, 132px); padding-bottom: clamp(82px, 11vw, 132px); }
+.bevel2-privacy { min-height: 500px; padding-top: 64px; padding-bottom: 64px; }
+.bevel2-reviews { padding-top: clamp(78px, 10vw, 124px); padding-bottom: clamp(90px, 10vw, 118px); }
+.bevel2-reviews .bevel2-centered-heading { margin-bottom: 40px; }
+.bevel2-final { min-height: 520px; }
+.bevel2-final-image { min-height: 520px; }
+
+@media (max-width: 680px) {
+  .bevel2-download { padding-top: 58px; padding-bottom: 58px; }
+  .bevel2-community { padding-top: 50px; padding-bottom: 72px; }
+  .bevel2-centered-heading { margin-bottom: 28px; }
+  .bevel2-chapters { padding-top: 64px; padding-bottom: 24px; }
+  .bevel2-chapters-heading { margin-bottom: 32px; }
+  .bevel2-intelligence { padding-top: 60px; padding-bottom: 60px; }
+  .bevel2-intelligence-heading { margin-bottom: 34px; }
+  .bevel2-extras { padding-top: 64px; padding-bottom: 78px; }
+  .bevel2-privacy { min-height: 430px; padding-top: 50px; padding-bottom: 50px; }
+  .bevel2-reviews { padding-top: 60px; padding-bottom: 74px; }
+  .bevel2-reviews .bevel2-centered-heading { margin-bottom: 28px; }
+  .bevel2-final { min-height: 0; }
+  .bevel2-final-image { min-height: 320px; }
+}
 .bevel2-download-card { min-height: 500px; }.bevel2-download-phone { width: 300px; margin-left: -48px; margin-right: 26px; }
 @media (max-width: 900px) { .bevel2-download-card { min-height: 420px; }.bevel2-download-phone { width: 250px; margin-left: -36px; margin-right: 20px; } }
 @media (max-width: 680px) { .bevel2-download-card { min-height: 360px; }.bevel2-download-phone { width: 180px; margin-left: -28px; margin-right: 14px; } }
