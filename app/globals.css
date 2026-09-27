@@ -1599,6 +1599,23 @@ h2 { margin: 0; font-size: 1.05rem; letter-spacing: -.025em; }
 @media (min-width: 901px) { .bevel2-intelligence-grid article { min-height: 500px; } }
 @media (max-width: 900px) { .bevel2-intelligence-grid article { min-height: 450px; } }
 @media (max-width: 680px) { .bevel2-intelligence-grid article { min-height: 420px; } }
+@media (max-width: 680px) {
+  .bevel2-chapters .screen-tour-tabs {
+    display: flex;
+    gap: 6px;
+    overflow-x: auto;
+    scroll-padding-inline: 6px;
+    scrollbar-width: none;
+  }
+
+  .bevel2-chapters .screen-tour-tabs::-webkit-scrollbar { display: none; }
+
+  .bevel2-chapters .screen-tour-tabs button {
+    min-width: 138px;
+    flex: 0 0 138px;
+    white-space: nowrap;
+  }
+}
 @media (min-width: 681px) {
   .bevel2-download-button {
     display: grid;
