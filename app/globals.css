@@ -1578,6 +1578,24 @@ h2 { margin: 0; font-size: 1.05rem; letter-spacing: -.025em; }
     flex: 0 0 min(220px, 30vw) !important;
   }
 }
+/* Coach card visuals: use the supplied editorial artwork instead of phone mockups. */
+.bevel2-intelligence-visual {
+  display: block;
+  align-self: center;
+  height: auto;
+  max-width: none;
+  margin-top: 28px;
+  object-fit: contain;
+  filter: drop-shadow(0 18px 24px rgba(15,43,31,.12));
+}
+.bevel2-intelligence-visual-racket { width: min(78%, 240px); transform: translateY(12px); }
+.bevel2-intelligence-visual-handshake { width: min(100%, 310px); transform: translateY(18px); }
+.bevel2-intelligence-visual-surfaces { width: calc(100% + 8px); margin-right: -4px; margin-left: -4px; transform: translateY(8px); }
+@media (max-width: 680px) {
+  .bevel2-intelligence-visual-racket { width: min(78%, 220px); }
+  .bevel2-intelligence-visual-handshake { width: min(100%, 300px); }
+  .bevel2-intelligence-visual-surfaces { width: calc(100% + 12px); margin-right: -6px; margin-left: -6px; }
+}
 @media (min-width: 681px) {
   .bevel2-download-button {
     display: grid;
