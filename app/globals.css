@@ -1554,6 +1554,79 @@ h2 { margin: 0; font-size: 1.05rem; letter-spacing: -.025em; }
 @media (max-width: 680px) { .bevel2-download-card { min-height: 340px; }.bevel2-download-phone { width: 155px; margin-left: -25px; margin-right: 10px; }.bevel2-download-button { min-height: 44px; padding: 0 16px; } }
 .mockup-carousel-track { scrollbar-width: none; }.mockup-carousel-track::-webkit-scrollbar { display: none; }
 
+/* Site-wide density pass: reduce empty bands while keeping touch targets readable. */
+:root { --page-gutter: 1rem; --space-8: 1.5rem; }
+
+.app-canvas .main-content { padding: 18px var(--page-gutter) 80px; }
+.app-canvas .home-header, .app-canvas .screen-header { margin-bottom: 18px; }
+.app-canvas .quick-actions, .app-canvas .dashboard-grid { margin-top: 22px; }
+.app-canvas .recent-match, .app-canvas .invite-preview { margin-top: 18px; }
+.app-canvas .placeholder-view { min-height: 45svh; padding: 10vh 10px; }
+.app-canvas .empty-state { min-height: 240px; padding: 28px; }
+.app-canvas .compact-empty { min-height: 220px; margin-top: 16px; }
+.app-canvas .profile-block { padding: 15px 0; }
+.app-canvas .detail-list > div { padding: 12px 15px; }
+.app-canvas .head-to-head-card, .app-canvas .previous-meeting { padding: 14px; }
+.app-canvas .complete-screen { min-height: calc(100svh - 230px); }
+.app-canvas .summary-result { padding: 18px; }
+.app-canvas .map-canvas { min-height: 340px; }
+.app-canvas .nearby-courts { padding: 20px 15px 12px; }
+
+.bevel2-hero-surface { min-height: min(680px, calc(100svh - 92px)); }
+.bevel2-download { padding-top: clamp(52px, 5vw, 78px); padding-bottom: clamp(52px, 5vw, 78px); }
+.bevel2-community { padding-top: clamp(48px, 5vw, 72px); padding-bottom: clamp(72px, 8vw, 100px); }
+.bevel2-centered-heading { margin-bottom: 34px; }
+.bevel2-chapters { padding-top: clamp(64px, 7vw, 100px); padding-bottom: clamp(64px, 7vw, 100px); }
+.bevel2-chapters-heading { margin-bottom: 34px; }
+.bevel2-chapters .screen-tour-stage { min-height: 500px; padding-top: 30px; }
+.bevel2-intelligence { padding-top: clamp(68px, 8vw, 105px); padding-bottom: clamp(68px, 8vw, 105px); }
+.bevel2-intelligence-heading { margin-bottom: 34px; }
+.bevel2-intelligence-grid article { min-height: 500px; }
+.bevel2-extras { padding-top: clamp(70px, 9vw, 110px); padding-bottom: clamp(70px, 9vw, 110px); }
+.bevel2-privacy { min-height: 440px; padding-top: 56px; padding-bottom: 56px; }
+.bevel2-reviews { padding-top: clamp(68px, 8vw, 105px); padding-bottom: clamp(78px, 8vw, 100px); }
+.bevel2-reviews .bevel2-centered-heading { margin-bottom: 34px; }
+.bevel2-final { min-height: 480px; }
+.bevel2-final-image { min-height: 480px; }
+.bevel2-footer { padding-top: 28px; }
+
+.legal-document { padding-top: clamp(48px, 6vw, 80px); padding-bottom: 78px; }
+.legal-updated { margin-bottom: 36px; }
+.legal-document h2 { margin-top: 36px; }
+.legal-document ul { margin-bottom: 22px; }
+.legal-document li { margin: 6px 0; }
+.legal-footer-note { margin-top: 48px; }
+
+@media (min-width: 640px) {
+  .app-canvas .main-content { padding: 28px 28px 88px; }
+}
+
+@media (min-width: 960px) {
+  .app-canvas .main-content { padding: 36px 40px 72px; }
+  .app-canvas .map-canvas { min-height: 500px; }
+  .app-canvas .nearby-courts { padding: 22px 16px; }
+  .app-canvas .performance-stats div { padding: 18px 8px; }
+}
+
+@media (max-width: 680px) {
+  .bevel2-hero-surface { min-height: 700px; }
+  .bevel2-download { padding-top: 48px; padding-bottom: 48px; }
+  .bevel2-community { padding-top: 42px; padding-bottom: 62px; }
+  .bevel2-centered-heading { margin-bottom: 24px; }
+  .bevel2-chapters { padding-top: 54px; padding-bottom: 20px; }
+  .bevel2-chapters-heading { margin-bottom: 26px; }
+  .bevel2-chapters .screen-tour-stage { min-height: 0; padding-top: 24px; }
+  .bevel2-intelligence { padding-top: 52px; padding-bottom: 52px; }
+  .bevel2-intelligence-heading { margin-bottom: 28px; }
+  .bevel2-intelligence-grid article { min-height: 410px; }
+  .bevel2-extras { padding-top: 54px; padding-bottom: 66px; }
+  .bevel2-privacy { min-height: 400px; padding-top: 44px; padding-bottom: 44px; }
+  .bevel2-reviews { padding-top: 52px; padding-bottom: 64px; }
+  .bevel2-reviews .bevel2-centered-heading { margin-bottom: 24px; }
+  .bevel2-final-image { min-height: 300px; }
+  .bevel2-footer { padding-top: 22px; }
+}
+
 /* Density pass: keep the landing page flowing after the surface ticker was removed. */
 .bevel2-download { padding-top: clamp(56px, 6vw, 92px); padding-bottom: clamp(56px, 6vw, 92px); }
 .bevel2-community { padding-top: clamp(56px, 6vw, 88px); padding-bottom: clamp(84px, 9vw, 118px); }
