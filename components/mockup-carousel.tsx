@@ -1,8 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { ArrowLeft, ArrowRight } from "lucide-react";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 
 const mockups = [
   ["courts", "Courts"],
@@ -17,16 +16,26 @@ const mockups = [
 
 export function MockupCarousel() {
   const trackRef = useRef<HTMLDivElement>(null);
-  const scroll = (direction: number) => trackRef.current?.scrollBy({ left: direction * 360, behavior: "smooth" });
+  useEffect(() => {
+    const track = trackRef.current;
+    if (!track || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    const timer = window.setInterval(() => {
+      const maxScroll = track.scrollWidth - track.clientWidth;
+      if (track.scrollLeft >= maxScroll - 8) {
+        track.scrollTo({ left: 0, behavior: "smooth" });
+      } else {
+        track.scrollBy({ left: 300, behavior: "smooth" });
+      }
+    }, 2600);
+
+    return () => window.clearInterval(timer);
+  }, []);
 
   return (
     <div className="mockup-carousel" aria-label="RallyUp app screens">
       <div className="mockup-carousel-controls">
         <span>EXPLORE THE APP</span>
-        <div>
-          <button type="button" aria-label="Previous mockup" onClick={() => scroll(-1)}><ArrowLeft aria-hidden="true" /></button>
-          <button type="button" aria-label="Next mockup" onClick={() => scroll(1)}><ArrowRight aria-hidden="true" /></button>
-        </div>
       </div>
       <div className="mockup-carousel-track" ref={trackRef} tabIndex={0}>
         {mockups.map(([name, label]) => (
