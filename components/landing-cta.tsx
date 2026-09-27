@@ -10,7 +10,7 @@ export function LandingCta({
 }) {
   return (
     <a href="#product" className={`landing-cta ${className}`}>
-      {children}
+      <span className="landing-cta-label">{children}</span>
       <ArrowRight aria-hidden="true" />
     </a>
   );
