@@ -1800,10 +1800,17 @@ h2 { margin: 0; font-size: 1.05rem; letter-spacing: -.025em; }
   }
 
   .bevel2-download-button {
+    position: relative;
     min-height: 52px;
     margin-top: 10px;
-    padding: 0 22px;
+    padding: 0 48px;
     font-size: .86rem;
+    text-align: center;
+  }
+
+  .bevel2-download-button svg {
+    position: absolute;
+    right: 20px;
   }
 }
 .bevel2-supplied-mockup { position: relative; display: block; flex: 0 0 auto; }.bevel2-supplied-mockup > img { display: block; width: 100%; height: auto; object-fit: contain; }
