@@ -1752,8 +1752,14 @@ h2 { margin: 0; font-size: 1.05rem; letter-spacing: -.025em; }
   }
 
   .bevel2-download-points {
+    width: 100%;
+    max-width: none;
     gap: 12px;
     margin-top: 28px;
+    margin-right: 0;
+    margin-left: 0;
+    justify-items: start;
+    text-align: left;
   }
 
   .bevel2-download-card {
