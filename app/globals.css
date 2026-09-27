@@ -1795,8 +1795,22 @@ h2 { margin: 0; font-size: 1.05rem; letter-spacing: -.025em; }
   }
 
   .bevel2-rating {
+    width: 100%;
+    flex-direction: row;
+    align-items: center;
     justify-content: flex-start;
+    gap: 10px;
+    margin-top: 16px;
+    text-align: left;
   }
+
+  .bevel2-rating span,
+  .bevel2-rating small {
+    white-space: nowrap;
+  }
+
+  .bevel2-rating span { font-size: .95rem; }
+  .bevel2-rating small { font-size: .66rem; }
 }
 
 /* Hero desktop rhythm: give the display line enough measure to stay together. */
