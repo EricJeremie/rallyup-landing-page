@@ -1571,7 +1571,13 @@ h2 { margin: 0; font-size: 1.05rem; letter-spacing: -.025em; }
 .mockup-carousel:hover .mockup-carousel-track, .mockup-carousel:focus-within .mockup-carousel-track { animation-play-state: paused; }
 @keyframes mockup-carousel-drift { to { transform: translateX(-50%); } }
 @media (max-width: 680px) { .mockup-carousel-group { gap: 12px; padding: 4px 6px 20px; } }
-@media (min-width: 681px) { .mockup-carousel-item { flex-basis: clamp(210px, 18vw, 280px); } }
+@media (min-width: 681px) {
+  .mockup-carousel-group .mockup-carousel-item {
+    width: min(220px, 30vw);
+    max-width: 220px;
+    flex: 0 0 min(220px, 30vw) !important;
+  }
+}
 @media (prefers-reduced-motion: reduce) { .mockup-carousel-track { animation: none; } }
 
 /* Site-wide density pass: reduce empty bands while keeping touch targets readable. */
