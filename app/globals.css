@@ -1726,6 +1726,86 @@ h2 { margin: 0; font-size: 1.05rem; letter-spacing: -.025em; }
     white-space: nowrap;
   }
 }
+
+/* Product proof mobile rhythm: stack the phone and CTA into one clear flow. */
+@media (max-width: 680px) {
+  .bevel2-download {
+    width: min(calc(100% - 36px), 420px);
+    padding-top: 58px;
+    padding-bottom: 72px;
+  }
+
+  .bevel2-download-copy {
+    width: 100%;
+  }
+
+  .bevel2-download-copy h2 {
+    max-width: 100%;
+    font-size: clamp(2.8rem, 11vw, 4.2rem);
+    line-height: .92;
+  }
+
+  .bevel2-download-copy > p:last-child {
+    margin-top: 18px;
+    font-size: 1rem;
+    line-height: 1.45;
+  }
+
+  .bevel2-download-points {
+    gap: 12px;
+    margin-top: 28px;
+  }
+
+  .bevel2-download-card {
+    display: flex;
+    min-height: 0;
+    flex-direction: column;
+    align-items: center;
+    gap: 22px;
+    margin-top: 44px;
+    padding: 0;
+    overflow: visible;
+    text-align: center;
+  }
+
+  .bevel2-download-phone {
+    width: min(68vw, 230px);
+    margin: 0;
+    transform: none;
+  }
+
+  .bevel2-download-card > div {
+    align-items: center;
+    gap: 9px;
+    padding: 0 0 4px;
+  }
+
+  .bevel2-download-mark {
+    width: 48px;
+    height: 48px;
+    margin-bottom: 4px;
+    font-size: 1.45rem;
+  }
+
+  .bevel2-download-card strong {
+    max-width: 260px;
+    font-size: 1.7rem;
+    line-height: 1.02;
+  }
+
+  .bevel2-download-card small {
+    max-width: 230px;
+    font-size: .92rem;
+    line-height: 1.45;
+  }
+
+  .bevel2-download-button {
+    min-height: 52px;
+    margin-top: 10px;
+    padding: 0 22px;
+    font-size: .86rem;
+  }
+}
 .bevel2-supplied-mockup { position: relative; display: block; flex: 0 0 auto; }.bevel2-supplied-mockup > img { display: block; width: 100%; height: auto; object-fit: contain; }
 .bevel2-chapters .screen-tour-device { border: 0; padding: 0; background: transparent; box-shadow: none; aspect-ratio: 410 / 887; }.bevel2-chapters .screen-tour-device .screen-tour-image { display: block; width: 100%; height: auto; object-fit: contain; }
 .bevel2-download-card { overflow: visible; padding: 0; border-radius: 0; background: transparent; }.bevel2-download-card::before { display: none; }.bevel2-download-phone { margin: 0 28px 0 -10px; transform: none; }.bevel2-download-mark { background: var(--bevel2-lime); }.bevel2-download-card > div { padding: 18px 0; }
