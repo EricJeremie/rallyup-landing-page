@@ -1708,6 +1708,24 @@ h2 { margin: 0; font-size: 1.05rem; letter-spacing: -.025em; }
     justify-content: flex-start;
   }
 }
+
+/* Hero desktop rhythm: give the display line enough measure to stay together. */
+@media (min-width: 901px) {
+  .bevel2-hero-copy {
+    max-width: 760px;
+    padding-right: clamp(28px, 5vw, 84px);
+    padding-left: clamp(28px, 5vw, 84px);
+  }
+
+  .bevel2-hero h1 {
+    line-height: .87;
+    font-optical-sizing: auto;
+  }
+
+  .bevel2-hero h1 em {
+    white-space: nowrap;
+  }
+}
 .bevel2-supplied-mockup { position: relative; display: block; flex: 0 0 auto; }.bevel2-supplied-mockup > img { display: block; width: 100%; height: auto; object-fit: contain; }
 .bevel2-chapters .screen-tour-device { border: 0; padding: 0; background: transparent; box-shadow: none; aspect-ratio: 410 / 887; }.bevel2-chapters .screen-tour-device .screen-tour-image { display: block; width: 100%; height: auto; object-fit: contain; }
 .bevel2-download-card { overflow: visible; padding: 0; border-radius: 0; background: transparent; }.bevel2-download-card::before { display: none; }.bevel2-download-phone { margin: 0 28px 0 -10px; transform: none; }.bevel2-download-mark { background: var(--bevel2-lime); }.bevel2-download-card > div { padding: 18px 0; }
