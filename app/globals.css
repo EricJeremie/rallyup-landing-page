@@ -1570,3 +1570,5 @@ h2 { margin: 0; font-size: 1.05rem; letter-spacing: -.025em; }
 @media (max-width: 680px) { .bevel2-download-phone { margin: 0 18px 0 -8px; } }
 /* Use the alpha channel of the transparent mockups; avoid rectangular shadows. */
 .mockup-carousel-item img { border-radius: 0; box-shadow: none; filter: drop-shadow(0 18px 24px rgba(15,43,31,.12)); }
+@media (min-width: 681px) { .bevel2-community { width: min(calc(100% - 64px), 1480px); }.mockup-carousel { width: 100%; }.mockup-carousel-item { flex-basis: calc((100% - 54px) / 4); } }
+.mockup-carousel-track { scrollbar-width: none; }.mockup-carousel-track::-webkit-scrollbar { display: none; }

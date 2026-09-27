@@ -22,10 +22,13 @@ export function MockupCarousel() {
 
     const timer = window.setInterval(() => {
       const maxScroll = track.scrollWidth - track.clientWidth;
+      const firstItem = track.querySelector<HTMLElement>(".mockup-carousel-item");
+      const gap = Number.parseFloat(getComputedStyle(track).columnGap || getComputedStyle(track).gap || "0");
+      const step = (firstItem?.getBoundingClientRect().width ?? 280) + gap;
       if (track.scrollLeft >= maxScroll - 8) {
         track.scrollTo({ left: 0, behavior: "smooth" });
       } else {
-        track.scrollBy({ left: 300, behavior: "smooth" });
+        track.scrollBy({ left: step, behavior: "smooth" });
       }
     }, 2600);
 
