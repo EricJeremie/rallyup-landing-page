@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useRef } from "react";
 
 const mockups = [
   ["courts", "Courts"],
@@ -15,37 +14,21 @@ const mockups = [
 ] as const;
 
 export function MockupCarousel() {
-  const trackRef = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    const track = trackRef.current;
-    if (!track || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-
-    const timer = window.setInterval(() => {
-      const maxScroll = track.scrollWidth - track.clientWidth;
-      const firstItem = track.querySelector<HTMLElement>(".mockup-carousel-item");
-      const gap = Number.parseFloat(getComputedStyle(track).columnGap || getComputedStyle(track).gap || "0");
-      const step = (firstItem?.getBoundingClientRect().width ?? 280) + gap;
-      if (track.scrollLeft >= maxScroll - 8) {
-        track.scrollTo({ left: 0, behavior: "smooth" });
-      } else {
-        track.scrollBy({ left: step, behavior: "smooth" });
-      }
-    }, 2600);
-
-    return () => window.clearInterval(timer);
-  }, []);
-
   return (
     <div className="mockup-carousel" aria-label="RallyUp app screens">
       <div className="mockup-carousel-controls">
         <span>EXPLORE THE APP</span>
       </div>
-      <div className="mockup-carousel-track" ref={trackRef} tabIndex={0}>
-        {mockups.map(([name, label]) => (
-          <figure className="mockup-carousel-item" key={name}>
-            <Image src={`/images/mockups/${name}.png`} alt={`RallyUp ${label} screen`} width={410} height={887} sizes="(max-width: 680px) 68vw, 245px" />
-            <figcaption>{label}</figcaption>
-          </figure>
+      <div className="mockup-carousel-track" tabIndex={0}>
+        {[0, 1].map((group) => (
+          <div className="mockup-carousel-group" key={group} aria-hidden={group === 1}>
+            {mockups.map(([name, label]) => (
+              <figure className="mockup-carousel-item" key={`${group}-${name}`}>
+                <Image src={`/images/mockups/${name}.png`} alt={`RallyUp ${label} screen`} width={410} height={887} sizes="(max-width: 680px) 68vw, 245px" />
+                <figcaption>{label}</figcaption>
+              </figure>
+            ))}
+          </div>
         ))}
       </div>
     </div>

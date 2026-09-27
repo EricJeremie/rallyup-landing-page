@@ -1554,6 +1554,25 @@ h2 { margin: 0; font-size: 1.05rem; letter-spacing: -.025em; }
 @media (max-width: 680px) { .bevel2-download-card { min-height: 340px; }.bevel2-download-phone { width: 155px; margin-left: -25px; margin-right: 10px; }.bevel2-download-button { min-height: 44px; padding: 0 16px; } }
 .mockup-carousel-track { scrollbar-width: none; }.mockup-carousel-track::-webkit-scrollbar { display: none; }
 
+/* Seamless app-screen marquee: the duplicated track removes the end-of-list jump. */
+.mockup-carousel { overflow: hidden; }
+.mockup-carousel-track {
+  display: flex;
+  width: max-content;
+  gap: 0;
+  padding: 0;
+  overflow: visible;
+  scroll-snap-type: none;
+  animation: mockup-carousel-drift 42s linear infinite;
+  will-change: transform;
+}
+.mockup-carousel-group { display: flex; flex: 0 0 auto; gap: 18px; padding: 4px 9px 28px; }
+.mockup-carousel-item { scroll-snap-align: none; }
+.mockup-carousel:hover .mockup-carousel-track, .mockup-carousel:focus-within .mockup-carousel-track { animation-play-state: paused; }
+@keyframes mockup-carousel-drift { to { transform: translateX(-50%); } }
+@media (max-width: 680px) { .mockup-carousel-group { gap: 12px; padding: 4px 6px 20px; } }
+@media (prefers-reduced-motion: reduce) { .mockup-carousel-track { animation: none; } }
+
 /* Site-wide density pass: reduce empty bands while keeping touch targets readable. */
 :root { --page-gutter: 1rem; --space-8: 1.5rem; }
 
