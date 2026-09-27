@@ -1578,6 +1578,29 @@ h2 { margin: 0; font-size: 1.05rem; letter-spacing: -.025em; }
     flex: 0 0 min(220px, 30vw) !important;
   }
 }
+@media (min-width: 681px) {
+  .bevel2-download-button {
+    display: grid;
+    width: min(100%, 20rem);
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 0;
+    padding: 0 18px;
+    text-align: center;
+  }
+
+  .bevel2-download-button .landing-cta-label {
+    grid-column: 2;
+    justify-self: center;
+    white-space: nowrap;
+  }
+
+  .bevel2-download-button svg {
+    position: static;
+    grid-column: 3;
+    justify-self: end;
+  }
+}
 @media (prefers-reduced-motion: reduce) { .mockup-carousel-track { animation: none; } }
 
 /* Site-wide density pass: reduce empty bands while keeping touch targets readable. */
