@@ -1588,13 +1588,13 @@ h2 { margin: 0; font-size: 1.05rem; letter-spacing: -.025em; }
   object-fit: contain;
   filter: drop-shadow(0 18px 24px rgba(15,43,31,.12));
 }
-.bevel2-intelligence-visual-racket { width: min(78%, 240px); transform: translateY(12px); }
-.bevel2-intelligence-visual-handshake { width: min(100%, 310px); transform: translateY(18px); }
-.bevel2-intelligence-visual-surfaces { width: calc(100% + 8px); margin-right: -4px; margin-left: -4px; transform: translateY(8px); }
+.bevel2-intelligence-visual-racket { width: calc(100% + 24px); max-width: none; margin-left: -12px; transform: translateY(12px); }
+.bevel2-intelligence-visual-handshake { width: calc(100% + 32px); max-width: none; margin-left: -16px; transform: translateY(18px); }
+.bevel2-intelligence-visual-surfaces { width: calc(100% + 32px); max-width: none; margin-right: -16px; margin-left: -16px; transform: translateY(8px); }
 @media (max-width: 680px) {
-  .bevel2-intelligence-visual-racket { width: min(78%, 220px); }
-  .bevel2-intelligence-visual-handshake { width: min(100%, 300px); }
-  .bevel2-intelligence-visual-surfaces { width: calc(100% + 12px); margin-right: -6px; margin-left: -6px; }
+  .bevel2-intelligence-visual-racket { width: calc(100% + 12px); margin-left: -6px; }
+  .bevel2-intelligence-visual-handshake { width: calc(100% + 16px); margin-left: -8px; }
+  .bevel2-intelligence-visual-surfaces { width: calc(100% + 16px); margin-right: -8px; margin-left: -8px; }
 }
 @media (min-width: 681px) {
   .bevel2-download-button {
