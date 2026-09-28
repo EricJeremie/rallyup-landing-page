@@ -4,6 +4,7 @@
   "outputDirectory": "dist/client",
   "installCommand": "npm ci",
   "rewrites": [
+    { "source": "/coming-soon", "destination": "/coming-soon.html" },
     { "source": "/privacy", "destination": "/privacy.html" },
     { "source": "/terms", "destination": "/terms.html" }
   ]
