@@ -1554,6 +1554,169 @@ h2 { margin: 0; font-size: 1.05rem; letter-spacing: -.025em; }
 @media (max-width: 680px) { .bevel2-download-card { min-height: 340px; }.bevel2-download-phone { width: 155px; margin-left: -25px; margin-right: 10px; }.bevel2-download-button { min-height: 44px; padding: 0 16px; } }
 .mockup-carousel-track { scrollbar-width: none; }.mockup-carousel-track::-webkit-scrollbar { display: none; }
 
+/* Coming-soon route: a focused holding state for pre-launch CTAs. */
+.bevel2-coming-soon {
+  --coming-ink: #101114;
+  --coming-muted: #73777f;
+  --coming-paper: #fafafa;
+  --coming-lilac: #eeeafe;
+  --coming-lime: #caff43;
+  min-height: 100svh;
+  overflow: hidden;
+  background: linear-gradient(145deg, #f8f9f7 0%, #eef3ff 52%, #eeecff 100%);
+  color: var(--coming-ink);
+  font-family: var(--font-sans);
+}
+.bevel2-coming-soon a { color: inherit; text-decoration: none; }
+.bevel2-coming-header { position: relative; z-index: 2; display: flex; min-height: 84px; align-items: center; justify-content: space-between; width: min(calc(100% - 36px), 1240px); margin: 0 auto; }
+.bevel2-coming-logo { display: inline-flex; width: 96px; }
+.bevel2-coming-logo img { width: 100%; height: auto; }
+.bevel2-coming-back { display: inline-flex; align-items: center; gap: 8px; color: #6c7078; font-size: .78rem; font-weight: 700; transition: color 180ms ease, transform 260ms cubic-bezier(.22,1,.36,1); }
+.bevel2-coming-back svg { width: 15px; transition: transform 260ms cubic-bezier(.22,1,.36,1); }
+.bevel2-coming-back:hover { color: var(--coming-ink); transform: translateX(-2px); }
+.bevel2-coming-back:hover svg { transform: translateX(-3px); }
+.bevel2-coming-stage { position: relative; display: grid; min-height: calc(100svh - 84px); grid-template-columns: minmax(0, 1fr) minmax(260px, .75fr); align-items: center; gap: clamp(30px, 8vw, 130px); width: min(calc(100% - 72px), 1240px); margin: 0 auto; padding: 40px 0 100px; isolation: isolate; }
+.bevel2-coming-stage::before { position: absolute; z-index: -1; top: 4%; right: -14%; width: min(70vw, 920px); aspect-ratio: 1; border: 1px solid rgba(125,119,180,.13); border-radius: 50%; box-shadow: 0 0 0 52px rgba(125,119,180,.045), 0 0 0 116px rgba(125,119,180,.025); content: ""; animation: bevel2-coming-breathe 12s ease-in-out infinite alternate; }
+.bevel2-coming-copy { max-width: 720px; }
+.bevel2-coming-copy h1 { margin: 0; font-size: clamp(3.8rem, 8vw, 7.2rem); font-weight: 720; letter-spacing: -.085em; line-height: .9; }
+.bevel2-coming-copy h1 em { color: #7770b8; font-family: Georgia, "Times New Roman", serif; font-size: 1.06em; font-weight: 400; letter-spacing: -.08em; }
+.bevel2-coming-copy > p:not(.bevel2-overline) { max-width: 525px; margin: 26px 0 0; color: var(--coming-muted); font-size: clamp(1rem, 1.5vw, 1.18rem); line-height: 1.6; }
+.bevel2-coming-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 22px; margin-top: 34px; }
+.bevel2-coming-actions .bevel2-dark-button { min-height: 52px; padding: 0 22px; background: var(--coming-ink); color: white !important; }
+.bevel2-coming-actions .bevel2-dark-button:hover { background: #2e3139; transform: translateY(-2px); }
+.bevel2-coming-actions .bevel2-dark-button svg { width: 15px; }
+.bevel2-coming-contact { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; color: #6f6baa !important; font-size: .82rem; font-weight: 750; }
+.bevel2-coming-contact svg { width: 15px; transition: transform 220ms cubic-bezier(.22,1,.36,1); }
+.bevel2-coming-contact:hover svg { transform: translateX(3px); }
+.bevel2-coming-mark { display: flex; align-items: center; flex-direction: column; gap: 20px; justify-self: center; color: #858097; font-size: .64rem; font-weight: 800; letter-spacing: .16em; text-align: center; }
+.bevel2-coming-ball { display: grid; width: clamp(190px, 26vw, 310px); aspect-ratio: 1; place-items: center; border: 1px solid rgba(255,255,255,.88); border-radius: 50%; background: rgba(255,255,255,.42); box-shadow: 0 30px 80px rgba(97,91,157,.16), inset 0 1px 0 rgba(255,255,255,.96); backdrop-filter: blur(18px); animation: bevel2-coming-float 7s ease-in-out infinite; }
+.bevel2-coming-ball img { width: 72%; height: auto; filter: drop-shadow(0 18px 24px rgba(20,22,30,.15)); transition: transform 700ms cubic-bezier(.22,1,.36,1); }
+.bevel2-coming-mark:hover .bevel2-coming-ball img { transform: rotate(12deg) scale(1.05); }
+.bevel2-coming-orbit { position: absolute; z-index: -1; border: 1px solid rgba(202,255,67,.5); border-radius: 50%; }
+.bevel2-coming-orbit-one { top: 18%; right: 21%; width: 18px; height: 18px; box-shadow: 0 0 0 14px rgba(202,255,67,.1); }
+.bevel2-coming-orbit-two { right: 7%; bottom: 18%; width: 9px; height: 9px; border-color: rgba(125,119,180,.3); box-shadow: 0 0 0 10px rgba(125,119,180,.07); }
+@keyframes bevel2-coming-float { 0%, 100% { transform: translateY(0) rotate(-3deg); } 50% { transform: translateY(-12px) rotate(3deg); } }
+@keyframes bevel2-coming-breathe { to { transform: scale(1.06) rotate(8deg); } }
+@media (max-width: 760px) {
+  .bevel2-coming-header { width: min(calc(100% - 36px), 520px); min-height: 72px; }
+  .bevel2-coming-stage { display: flex; min-height: calc(100svh - 72px); width: min(calc(100% - 36px), 520px); flex-direction: column; align-items: flex-start; gap: 56px; padding: 54px 0 72px; }
+  .bevel2-coming-copy h1 { font-size: clamp(3.6rem, 15vw, 5.5rem); }
+  .bevel2-coming-copy > p:not(.bevel2-overline) { margin-top: 22px; font-size: 1rem; }
+  .bevel2-coming-actions { align-items: flex-start; flex-direction: column; gap: 13px; margin-top: 28px; }
+  .bevel2-coming-mark { align-self: center; }
+  .bevel2-coming-ball { width: min(60vw, 240px); }
+  .bevel2-coming-stage::before { top: 26%; right: -52%; width: 120vw; }
+  .bevel2-coming-orbit-one { top: 8%; right: 13%; }
+  .bevel2-coming-orbit-two { right: 14%; bottom: 9%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .bevel2-coming-stage::before, .bevel2-coming-ball { animation: none; }
+  .bevel2-coming-mark:hover .bevel2-coming-ball img { transform: none; }
+}
+
+/* Landing motion pass: give the page a quiet sense of depth and response. */
+.bevel2-landing::before {
+  position: fixed;
+  z-index: 60;
+  top: 0;
+  left: 0;
+  width: calc(var(--scroll-progress, 0) * 100%);
+  height: 2px;
+  background: var(--bevel2-lime);
+  box-shadow: 0 0 16px rgba(202, 255, 67, .7);
+  content: "";
+  pointer-events: none;
+  transform-origin: left center;
+}
+.bevel2-header-pill {
+  transition: box-shadow 420ms cubic-bezier(.22, 1, .36, 1), transform 420ms cubic-bezier(.22, 1, .36, 1);
+}
+.bevel2-header-pill:hover {
+  box-shadow: 0 14px 36px rgba(20, 25, 40, .1), inset 0 1px 0 rgba(255,255,255,.98);
+  transform: translateY(1px);
+}
+.bevel2-hero-surface,
+.bevel2-intelligence-grid article,
+.bevel2-download-card {
+  --pointer-x: 50%;
+  --pointer-y: 35%;
+}
+.bevel2-hero-surface::after,
+.bevel2-intelligence-grid article::after,
+.bevel2-download-card::after {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(420px circle at var(--pointer-x) var(--pointer-y), rgba(255,255,255,.52), transparent 68%);
+  content: "";
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 420ms ease;
+}
+.bevel2-hero-surface:hover::after,
+.bevel2-intelligence-grid article:hover::after,
+.bevel2-download-card:hover::after { opacity: 1; }
+.bevel2-hero-surface > *,
+.bevel2-intelligence-grid article > *,
+.bevel2-download-card > * { position: relative; }
+.bevel2-hero-surface > * { z-index: 1; }
+.bevel2-hero-surface > .bevel2-hero-copy,
+.bevel2-hero-surface > .bevel2-hero-art { z-index: 2; }
+.bevel2-hero-surface::before { animation: bevel2-surface-breathe 12s ease-in-out infinite alternate; }
+.bevel2-hero-court { transition: transform 700ms cubic-bezier(.22, 1, .36, 1), filter 700ms ease; }
+.bevel2-hero-surface:hover .bevel2-hero-court { filter: saturate(1.05) contrast(1.02); transform: scale(1.018); }
+.bevel2-hero-phone { animation: bevel2-float 7s ease-in-out infinite, bevel2-phone-glint 9s 1s ease-in-out infinite; }
+.bevel2-mini-score { transition: transform 420ms cubic-bezier(.22, 1, .36, 1), box-shadow 420ms ease; }
+.bevel2-hero-surface:hover .bevel2-mini-score:first-child { transform: translateY(-6px) rotate(-1deg); box-shadow: 0 19px 36px rgba(29,31,45,.16); }
+.bevel2-hero-surface:hover .bevel2-mini-score:last-child { transform: translateY(4px) rotate(1deg); }
+.landing-cta[data-magnetic] { --magnetic-x: 0px; --magnetic-y: 0px; transform: translate3d(var(--magnetic-x), var(--magnetic-y), 0); transition: transform 260ms cubic-bezier(.22, 1, .36, 1), background-color 180ms ease, box-shadow 260ms ease; }
+.landing-cta[data-magnetic]:hover { transform: translate3d(var(--magnetic-x), calc(var(--magnetic-y) - 2px), 0) scale(1.015); box-shadow: 0 10px 24px rgba(16,17,20,.14); }
+.landing-cta[data-magnetic] svg { transition: transform 260ms cubic-bezier(.22, 1, .36, 1); }
+.landing-cta[data-magnetic]:hover svg { transform: translateX(3px); }
+.bevel2-download-phone { transition: transform 700ms cubic-bezier(.22, 1, .36, 1), filter 700ms ease; }
+.bevel2-download-card:hover .bevel2-download-phone { transform: translateY(-10px) rotate(-2deg); filter: drop-shadow(0 24px 24px rgba(24,25,50,.18)); }
+.bevel2-download-mark { transition: transform 420ms cubic-bezier(.22, 1, .36, 1); }
+.bevel2-download-card:hover .bevel2-download-mark { transform: rotate(12deg) scale(1.08); }
+.mockup-carousel-track { perspective: 1200px; }
+.mockup-carousel-item { transition: transform 500ms cubic-bezier(.22, 1, .36, 1), opacity 500ms ease; }
+.mockup-carousel-item:hover { transform: translateY(-10px) rotateY(-3deg); }
+.mockup-carousel-item figcaption { transition: color 220ms ease, transform 220ms ease; }
+.mockup-carousel-item:hover figcaption { color: #65619f; transform: translateX(4px); }
+.bevel2-chapters .screen-tour-tabs button { position: relative; overflow: hidden; transition: background-color 260ms ease, color 260ms ease, transform 260ms ease; }
+.bevel2-chapters .screen-tour-tabs button::after { position: absolute; right: 18%; bottom: 0; left: 18%; height: 2px; background: #7770b8; content: ""; opacity: 0; transform: scaleX(.35); transition: opacity 260ms ease, transform 320ms cubic-bezier(.22, 1, .36, 1); }
+.bevel2-chapters .screen-tour-tabs button:hover { transform: translateY(-2px); }
+.bevel2-chapters .screen-tour-tabs button.is-active::after { opacity: 1; transform: scaleX(1); }
+.screen-tour-copy, .screen-tour-phone { animation: bevel2-panel-in 600ms cubic-bezier(.22, 1, .36, 1) both; }
+.screen-tour-phone { animation-delay: 70ms; }
+.bevel2-intelligence-grid article { transition: transform 500ms cubic-bezier(.22, 1, .36, 1), box-shadow 500ms ease; }
+.bevel2-intelligence-grid article:hover { box-shadow: 0 22px 46px rgba(49, 56, 90, .12); transform: translateY(-7px); }
+.bevel2-intelligence-visual { transition: transform 800ms cubic-bezier(.22, 1, .36, 1), filter 800ms ease; }
+.bevel2-intelligence-grid article:hover .bevel2-intelligence-visual { filter: saturate(1.08); transform: translateY(-10px) scale(1.025); }
+.bevel2-extras-grid article { position: relative; transition: padding-left 360ms cubic-bezier(.22, 1, .36, 1), background-color 360ms ease; }
+.bevel2-extras-grid article::before { position: absolute; inset: 0 auto 0 0; width: 3px; background: var(--bevel2-lime); content: ""; opacity: 0; transform: scaleY(.3); transition: opacity 280ms ease, transform 360ms cubic-bezier(.22, 1, .36, 1); }
+.bevel2-extras-grid article:hover { padding-left: 12px; background: rgba(238,236,255,.46); }
+.bevel2-extras-grid article:hover::before { opacity: 1; transform: scaleY(1); }
+.bevel2-extras-grid article > svg { transition: transform 280ms cubic-bezier(.22, 1, .36, 1), color 200ms ease; }
+.bevel2-extras-grid article:hover > svg { color: #7770b8; transform: translate(3px, -3px); }
+.bevel2-privacy-orbit { animation: bevel2-orbit-breathe 11s ease-in-out infinite alternate; }
+.bevel2-review-rail:hover { animation-play-state: paused; }
+.bevel2-review-rail article { transition: transform 420ms cubic-bezier(.22, 1, .36, 1), box-shadow 420ms ease; }
+.bevel2-review-rail article:hover { box-shadow: 0 18px 36px rgba(28, 31, 46, .12); transform: translateY(-8px) rotate(-1deg); }
+.bevel2-final-image img { transition: transform 1.2s cubic-bezier(.22, 1, .36, 1), filter 1.2s ease; }
+.bevel2-final:hover .bevel2-final-image img { filter: saturate(1.05); transform: scale(1.035); }
+@keyframes bevel2-surface-breathe { to { transform: scale(1.04) translateY(-1.5%); opacity: .82; } }
+@keyframes bevel2-phone-glint { 0%, 72%, 100% { filter: brightness(1); } 77% { filter: brightness(1.12); } 82% { filter: brightness(1); } }
+@keyframes bevel2-panel-in { from { opacity: .01; transform: translateY(12px) scale(.985); } to { opacity: 1; transform: translateY(0) scale(1); } }
+@keyframes bevel2-orbit-breathe { to { transform: translateX(-50%) scale(1.06) rotate(8deg); } }
+@media (prefers-reduced-motion: reduce) {
+  .bevel2-landing::before { display: none; }
+  .bevel2-hero-surface::before, .bevel2-hero-phone, .bevel2-hero-float, .bevel2-privacy-orbit, .bevel2-review-rail, .screen-tour-copy, .screen-tour-phone { animation: none !important; }
+  .bevel2-hero-court, .bevel2-download-phone, .bevel2-intelligence-visual, .bevel2-final-image img { transition: none !important; transform: none !important; }
+  .bevel2-hero-surface:hover .bevel2-hero-court, .bevel2-download-card:hover .bevel2-download-phone, .bevel2-intelligence-grid article:hover .bevel2-intelligence-visual, .bevel2-final:hover .bevel2-final-image img { filter: none; transform: none; }
+  .landing-cta[data-magnetic] { transform: none !important; transition: background-color 180ms ease, box-shadow 180ms ease; }
+  .landing-cta[data-magnetic]:hover { transform: none !important; }
+  .bevel2-intelligence-grid article:hover, .bevel2-review-rail article:hover, .mockup-carousel-item:hover { transform: none; }
+}
+
 /* Seamless app-screen marquee: the duplicated track removes the end-of-list jump. */
 .mockup-carousel { overflow: hidden; }
 .mockup-carousel-track {

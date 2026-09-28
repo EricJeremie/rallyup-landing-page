@@ -1,4 +1,5 @@
 import { ArrowRight } from "lucide-react";
+import Link from "next/link";
 import type { ReactNode } from "react";
 
 export function LandingCta({
@@ -9,9 +10,9 @@ export function LandingCta({
   children?: ReactNode;
 }) {
   return (
-    <a href="#product" className={`landing-cta ${className}`}>
+    <Link href="/coming-soon" className={`landing-cta ${className}`} data-magnetic>
       <span className="landing-cta-label">{children}</span>
       <ArrowRight aria-hidden="true" />
-    </a>
+    </Link>
   );
 }
